@@ -11,7 +11,9 @@ class Brief extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'brief_branch_id',
+        'brief_level_id'
     ];
 
     public function briefLevel(): BelongsTo
