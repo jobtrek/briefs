@@ -9,12 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
-        Schema::create('briefs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('brief_branch_id')->constrained();
-            $table->foreignId('brief_level_id')->constrained();
+        Schema::create('evaluation_criterias', function (Blueprint $table) {
+            $table->id('id_criter_eval');
+            $table->foreignId('id_criteria')->constrained('criterias')->onDelete('cascade');
+            $table->integer('note')->nullable();
+            $table->text('commentaire')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('briefs');
+        Schema::dropIfExists('evaluation_criteria');
     }
 };
