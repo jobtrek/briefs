@@ -11,15 +11,13 @@ class Evaluation extends Model
 
     protected $fillable = [
         'date_evaluation',
-        'commentaire_general_mandat',
         'brief_id',
         'criteria_id',
         'evaluation_criteria_id',
     ];
-
     public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(brief::class);
+        return $this->belongsTo(Brief::class);
     }
 
     public function criteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo

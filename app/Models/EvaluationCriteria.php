@@ -15,6 +15,8 @@ class EvaluationCriteria extends Model
         'criteria_id',
         'note',
         'commentaire',
+
+
     ];
 
     public function criteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
