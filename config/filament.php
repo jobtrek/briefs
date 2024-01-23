@@ -2,6 +2,11 @@
 
 return [
 
+    'resources' => [
+        // ...
+        \App\Filament\Resources\EvaluationCriteriaResource::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Broadcasting
