@@ -19,6 +19,6 @@ class EvaluationCriteria extends Model
 
     public function criteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Criteria::class, 'id_criteria');
+        return $this->belongsTo(Criteria::class);
     }
 }
