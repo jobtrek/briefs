@@ -6,6 +6,8 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Tables;
+use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
 
 class UserResource extends \Filament\Resources\Resource
@@ -18,16 +20,31 @@ class UserResource extends \Filament\Resources\Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->label('Name')
+                    ->required(),
+
+                Forms\Components\TextInput::make('username')
+                    ->label('Username')
+                    ->required(),
+
+                Forms\Components\TextInput::make('email')
+                    ->label('Email')
+                    ->required(),
+
+                Forms\Components\TextInput::make('password')
+                    ->label('Password')
+                    ->autocomplete('new-password')
+                    ->required(),
             ]);
     }
-
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('username')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
             ])
             ->filters([
                 //
