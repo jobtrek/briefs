@@ -7,6 +7,7 @@ use App\Filament\Resources\EvaluationResource\RelationManagers;
 use App\Models\Evaluation;
 use Faker\Core\Number;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,9 +25,11 @@ class EvaluationResource extends Resource
 
     public static function form(Form $form): Form
     {
-
         return $form
+
             ->schema([
+
+
                 Forms\Components\MultiSelect::make('criteria_id')
                     ->searchable()
                     ->relationship('criteria', 'description')
@@ -56,7 +59,7 @@ class EvaluationResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('criteria.description'),
-                Tables\Columns\TextColumn::make('evaluationCriteria.note')->label('Note'),
+                Tables\Columns\TextColumn::make('evaluationCriteria.note')->label('Note')->avg('evaluationCriteria','note'),
                 Tables\Columns\TextColumn::make('evaluationCriteria.commentaire')->label('Commentaire'),
             ])
 
