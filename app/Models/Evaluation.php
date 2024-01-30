@@ -13,7 +13,6 @@ class Evaluation extends Model
         'date_evaluation',
         'brief_id',
         'criteria_id',
-        'user_id',
         'evaluation_criteria_id',
     ];
     public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -26,7 +25,7 @@ class Evaluation extends Model
         return $this->belongsTo(Criteria::class);
     }
 
-    public function EvaluationCriteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function evaluationCriteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(EvaluationCriteria::class);
     }
