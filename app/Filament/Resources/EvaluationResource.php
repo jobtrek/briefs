@@ -29,6 +29,10 @@ class EvaluationResource extends Resource
 
             ->schema([
 
+                Forms\Components\Select::make('user_id')
+                    ->searchable()
+                    ->relationship('user', 'Name')
+                    ->required(),
 
                 Forms\Components\MultiSelect::make('criteria_id')
                     ->searchable()

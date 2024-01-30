@@ -15,6 +15,7 @@ class Criteria extends Model
         'name',
         'description',
         'brief_id',
+
     ];
 
     public function brief(): BelongsTo
