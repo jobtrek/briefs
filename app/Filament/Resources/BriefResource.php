@@ -42,10 +42,10 @@ class BriefResource extends Resource
                     ->preload()
                     ->searchable(),
 
-                Forms\Components\FileUpload::make('pdf_file')
-                    ->label('PDF File')
+                Forms\Components\FileUpload::make('attachment')
                     ->multiple()
-                    ->downloadable(),
+                    ->directory('form-attachments')
+                    ->required()
             ]);
     }
 
@@ -64,10 +64,6 @@ class BriefResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Action::make('Download PDF')
-                    ->icon('heroicon-o-folder-arrow-down')
-                    ->url(fn(Brief $record) => route('brief.pdf.download', $record))
-                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

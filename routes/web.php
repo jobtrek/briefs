@@ -17,4 +17,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{record/pdf/download}', [\App\Http\Controllers\DownloadPdfController::class, 'download'])->name('brief.pdf.download');
