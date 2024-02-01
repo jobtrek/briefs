@@ -30,3 +30,4 @@ class Evaluation extends Model
         return $this->belongsTo(EvaluationCriteria::class);
     }
 }
+

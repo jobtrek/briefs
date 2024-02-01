@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -39,7 +40,12 @@ class BriefResource extends Resource
                     ->relationship('briefLevel', 'number')
                     ->required()
                     ->preload()
-                    ->searchable()
+                    ->searchable(),
+
+                Forms\Components\FileUpload::make('pdf_file')
+                    ->label('PDF File')
+                    ->multiple()
+                    ->downloadable(),
             ]);
     }
 
@@ -49,7 +55,7 @@ class BriefResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('briefBranch.name')->sortable(),
-                Tables\Columns\TextColumn::make('briefLevel.number')->sortable()
+                Tables\Columns\TextColumn::make('briefLevel.number')->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('briefBranch')
@@ -57,7 +63,11 @@ class BriefResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
+                Tables\Actions\DeleteAction::make(),
+                Action::make('Download PDF')
+                    ->icon('heroicon-o-folder-arrow-down')
+                    ->url(fn(Brief $record) => route('brief.pdf.download', $record))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -65,6 +75,7 @@ class BriefResource extends Resource
                 ]),
             ]);
     }
+
 
     public static function getRelations(): array
     {
