@@ -43,9 +43,9 @@ class BriefResource extends Resource
                     ->searchable(),
 
                 Forms\Components\FileUpload::make('attachment')
-                    ->multiple()
                     ->directory('form-attachments')
-                    ->required()
+                    ->required()->openable(),
+
             ]);
     }
 

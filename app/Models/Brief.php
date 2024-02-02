@@ -18,6 +18,10 @@ class Brief extends Model
         'brief_level_id'
     ];
 
+    protected $casts = [
+        'attachment' => 'array',
+    ];
+
     public function briefLevel(): BelongsTo
     {
         return $this->belongsTo(BriefLevel::class);
