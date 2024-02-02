@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreignId('brief_id')->constrained();
             $table->date('date_debut');
             $table->date('date_fin');
+            $table->enum('status', ['new', 'processing','already rendered','unrealized'])->default('new');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

@@ -8,11 +8,13 @@ use App\Models\Brief;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\IconPosition;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\View\View;
 
 class BriefResource extends Resource
 {
@@ -56,6 +58,13 @@ class BriefResource extends Resource
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('briefBranch.name')->sortable(),
                 Tables\Columns\TextColumn::make('briefLevel.number')->sortable(),
+                Tables\Columns\TextColumn::make('attachment')
+                    ->sortable()
+                    ->label('PDF Attachment.')
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->iconPosition(IconPosition::Before)
+                    ->iconColor('primary'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('briefBranch')

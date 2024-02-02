@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('brief_branch_id')->constrained();
             $table->foreignId('brief_level_id')->constrained();
+            $table->string('attachment')->nullable();
             $table->timestamps();
         });
     }
