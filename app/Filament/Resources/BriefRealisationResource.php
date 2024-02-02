@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -23,15 +24,31 @@ class BriefRealisationResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('brief_id')
+                    ->relationship('brief', 'name')
+                    ->required()
+                    ->preload()
+                    ->searchable(),
+
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name')
+                    ->required()
+                    ->preload()
+                    ->searchable(),
+
+                Forms\Components\DateTimePicker::make('date_debut')
+                    ->required(),
+
+                Forms\Components\DateTimePicker::make('date_fin')
+                    ->required(),
             ]);
     }
-
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('brief.name')->sortable()->searchable(),
+
             ])
             ->filters([
                 //
