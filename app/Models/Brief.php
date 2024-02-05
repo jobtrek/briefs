@@ -15,7 +15,7 @@ class Brief extends Model
         'pdf_path',
         'attachment',
         'brief_branch_id',
-        'brief_level_id'
+        'brief_level_id',
     ];
 
     protected $casts = [

@@ -55,17 +55,23 @@ class BriefResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('brief.name')->sortable()->searchable(),
-                // other columns...
+                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('briefBranch.name')->sortable(),
+                Tables\Columns\TextColumn::make('briefLevel.number')->sortable(),
+                Tables\Columns\TextColumn::make('attachment')
+                    ->sortable()
+                    ->label('PDF Attachment.')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->iconPosition(IconPosition::Before)
+                    ->iconColor('primary'),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('brief')
-                    ->relationship('brief', 'name')
-                    ->preload(),
-                // other filters...
+                Tables\Filters\SelectFilter::make('briefBranch')
+                    ->relationship('briefBranch', 'name')->preload()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -73,7 +79,6 @@ class BriefResource extends Resource
                 ]),
             ]);
     }
-
 
 
     public static function getRelations(): array

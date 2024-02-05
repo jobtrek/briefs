@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\BriefStatus;
 use App\Filament\Resources\BriefRealisationResource\Pages;
 use App\Filament\Resources\BriefRealisationResource\RelationManagers;
 use App\Models\BriefRealisation;
 use Filament\Forms;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -48,13 +50,20 @@ class BriefRealisationResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('brief.name')->sortable()->searchable(),
-
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('date_debut'),
+                Tables\Columns\TextColumn::make('date_fin'),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge(),
+                Radio::make('statut')
+                    ->options(BriefStatus::class)
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
