@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\BriefStatus;
 use App\Filament\Resources\BriefRealisationResource\Pages;
 use App\Filament\Resources\BriefRealisationResource\RelationManagers;
 use App\Models\BriefRealisation;
@@ -43,6 +42,8 @@ class BriefRealisationResource extends Resource
 
                 Forms\Components\DateTimePicker::make('date_fin')
                     ->required(),
+
+
             ]);
     }
     public static function table(Table $table): Table
@@ -55,8 +56,6 @@ class BriefRealisationResource extends Resource
                 Tables\Columns\TextColumn::make('date_fin'),
                 Tables\Columns\TextColumn::make('status')
                     ->badge(),
-                Radio::make('statut')
-                    ->options(BriefStatus::class)
             ])
             ->filters([
                 //
