@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\BriefStatus;
 use App\Filament\Resources\BriefRealisationResource\Pages;
 use App\Filament\Resources\BriefRealisationResource\RelationManagers;
 use App\Models\BriefRealisation;
@@ -11,13 +12,14 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BriefRealisationResource extends Resource
 {
     protected static ?string $model = BriefRealisation::class;
+
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -41,6 +43,11 @@ class BriefRealisationResource extends Resource
                     ->required(),
 
                 Forms\Components\DateTimePicker::make('date_fin')
+                    ->required(),
+
+                Forms\Components\ToggleButtons::make('status')
+                    ->inline()
+                    ->options(BriefStatus::class)
                     ->required(),
 
 
@@ -76,6 +83,14 @@ class BriefRealisationResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        /** @var class-string<Model> $modelClass */
+        $modelClass = static::$model;
+
+        return (string) $modelClass::where('status', 'new')->count();
     }
 
     public static function getPages(): array

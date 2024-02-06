@@ -33,7 +33,7 @@ class ListBriefRealisations extends ListRecords
             'new' => Tab::make()->query(fn ($query) => $query->where('status', 'new')),
             'processing' => Tab::make()->query(fn ($query) => $query->where('status', 'processing')),
             'delivered' => Tab::make()->query(fn ($query) => $query->where('status', 'delivered')),
-            'Delivered' => Tab::make()->query(fn ($query) => $query->where('status', 'Delivered')),
+            'undelivered' => Tab::make()->query(fn ($query) => $query->where('status', 'undelivered')),
         ];
     }
 }

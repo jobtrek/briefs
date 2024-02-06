@@ -4,6 +4,7 @@
 
 namespace App\Models;
 
+use App\Enums\BriefStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,13 @@ class BriefRealisation extends Model
         'brief_id',
         'date_debut',
         'date_fin',
+        'status',
     ];
+
+    protected $casts = [
+        'status' => BriefStatus::class,
+    ];
+
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
