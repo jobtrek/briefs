@@ -36,6 +36,13 @@ class EvaluationResource extends Resource
                     ->preload()
                     ->searchable(),
 
+                Forms\Components\Select::make('user_id')
+                    ->searchable()
+                    ->relationship('user', 'name')
+                    ->required()
+                    ->preload()
+                    ->searchable(),
+
                 Forms\Components\Select::make('brief_id')
                     ->relationship('brief', 'name')
                     ->required()
@@ -45,10 +52,13 @@ class EvaluationResource extends Resource
                 Forms\Components\TextInput::make('note')
                     ->numeric()
                     ->minValue(1)
-                    ->maxValue(20)
+                    ->maxValue(50)
                     ->required(),
 
-                Forms\Components\RichEditor::make('commentaire')
+                Forms\Components\RichEditor::make('commentaire_general_mandat')
+                    ->required(),
+
+                Forms\Components\DatePicker::make('date_evaluation')
                     ->required(),
             ]);
     }
