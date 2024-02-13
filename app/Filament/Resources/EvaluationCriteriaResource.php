@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BriefLevelResource\Pages;
-use App\Filament\Resources\BriefLevelResource\RelationManagers;
-use App\Models\BriefLevel;
+use App\Filament\Resources\EvaluationCriteriaResource\Pages;
+use App\Filament\Resources\EvaluationCriteriaResource\RelationManagers;
+use App\Models\EvaluationCriteria;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,19 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BriefLevelResource extends Resource
+class EvaluationCriteriaResource extends Resource
 {
-    protected static ?string $model = BriefLevel::class;
+    protected static ?string $model = EvaluationCriteria::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-line';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('number')
-                    ->numeric()
-                    ->required()
+                //
             ]);
     }
 
@@ -33,7 +31,7 @@ class BriefLevelResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('number')->sortable()->searchable()
+                //
             ])
             ->filters([
                 //
@@ -58,9 +56,9 @@ class BriefLevelResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBriefLevels::route('/'),
-            'create' => Pages\CreateBriefLevel::route('/create'),
-            'edit' => Pages\EditBriefLevel::route('/{record}/edit'),
+            'index' => Pages\ListEvaluationCriterias::route('/'),
+            'create' => Pages\CreateEvaluationCriteria::route('/create'),
+            'edit' => Pages\EditEvaluationCriteria::route('/{record}/edit'),
         ];
     }
 }

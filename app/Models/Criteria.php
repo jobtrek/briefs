@@ -15,6 +15,7 @@ class Criteria extends Model
         'name',
         'description',
         'brief_id',
+        "evaluation_criteria_id"
 
     ];
 
@@ -24,6 +25,7 @@ class Criteria extends Model
     }
     public function evaluationCriteria(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(Evaluation_Criteria::class, 'id_criteria');
+        return $this->hasOne(evaluationCriteria::class, 'id_criteria');
     }
+
 }

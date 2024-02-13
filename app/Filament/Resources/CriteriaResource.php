@@ -17,7 +17,7 @@ class CriteriaResource extends Resource
 {
     protected static ?string $model = Criteria::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document-plus';
 
     public static function form(Form $form): Form
     {
@@ -29,6 +29,8 @@ class CriteriaResource extends Resource
                     ->required()
                     ->preload()
                     ->searchable(),
+                Forms\Components\TextInput::make('note')->required(),
+
             ]);
 
     }
@@ -46,6 +48,7 @@ class CriteriaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

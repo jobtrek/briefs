@@ -29,7 +29,7 @@ class EvaluationResource extends Resource
 
             ->schema([
 
-                Forms\Components\MultiSelect::make('criteria_id')
+                Forms\Components\Select::make('criteria_id')
                     ->searchable()
                     ->relationship('criteria', 'description')
                     ->required()
