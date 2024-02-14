@@ -27,8 +27,16 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->colors([
-                'primary' => Color::Amber,
+            ->plugins([
+                \ChrisReedIO\Socialment\SocialmentPlugin::make()
+                    ->registerProvider('azure', 'fab-microsoft', 'Login avec Microsoft')
+                    ->loginRoute('filament.staff.auth.login')
+
+            ])
+
+
+            ->colors(['primary' => Color::Amber,
+
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

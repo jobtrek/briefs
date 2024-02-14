@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/login/azure/redirect', function () {
+    return Socialite::driver('azure')->redirect();
+});
+
+Route::get('/login/azure/callback', function () {
+    $user = Socialite::driver('azure')->user();
 });
