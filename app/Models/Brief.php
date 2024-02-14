@@ -13,6 +13,7 @@ class Brief extends Model
     protected $fillable = [
         'name',
         'pdf_path',
+        'year',
         'attachment',
         'brief_branch_id',
         'brief_level_id',

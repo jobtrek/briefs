@@ -44,6 +44,11 @@ class BriefResource extends Resource
                     ->preload()
                     ->searchable(),
 
+                Forms\Components\Select::make('year')
+                    ->options(['1' => 'Year 1', '2' => 'Year 2', '3' => 'Year 3'])
+                    ->required()
+                ,
+
                 Forms\Components\FileUpload::make('attachment')
                     ->directory('form-attachments')
                     ->required()->openable(),
@@ -64,6 +69,8 @@ class BriefResource extends Resource
                     ->icon('heroicon-o-arrow-down-tray')
                     ->iconPosition(IconPosition::Before)
                     ->iconColor('primary'),
+                Tables\Columns\TextColumn::make('year')->sortable()->alignCenter(),
+
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('briefBranch')
