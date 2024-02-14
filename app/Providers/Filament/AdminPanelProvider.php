@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \ChrisReedIO\Socialment\SocialmentPlugin::make()
                     ->registerProvider('azure', 'fab-microsoft', 'Login avec Microsoft')
                     ->loginRoute('filament.staff.auth.login')
