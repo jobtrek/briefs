@@ -9,6 +9,7 @@ use App\Models\BriefRealisation;
 use Filament\Forms;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Grid;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -53,6 +54,7 @@ class BriefRealisationResource extends Resource
 
             ]);
     }
+
     public static function table(Table $table): Table
     {
         return $table
