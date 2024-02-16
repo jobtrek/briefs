@@ -14,6 +14,7 @@ class Criteria extends Model
     protected $fillable = [
         'name',
         'description',
+        'evaluation',
         'brief_id',
         "evaluation_criteria_id"
 
@@ -28,4 +29,8 @@ class Criteria extends Model
         return $this->hasOne(evaluationCriteria::class, 'id_criteria');
     }
 
+    public function evaluations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Evaluation::class, 'id_critere');
+    }
 }

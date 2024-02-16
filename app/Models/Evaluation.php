@@ -14,9 +14,10 @@ class Evaluation extends Model
         'brief_id',
         'criteria_id',
         'user',
-        'evaluation_criteria_id',
         'commentaire_general_mandat',
     ];
+    private mixed $criteria;
+
     public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Brief::class);
@@ -34,6 +35,11 @@ class Evaluation extends Model
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getCriteriaDescriptionAttribute()
+    {
+        return optional($this->criteria)->description;
     }
 }
 

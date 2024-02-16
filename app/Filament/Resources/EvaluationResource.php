@@ -26,9 +26,7 @@ class EvaluationResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-
             ->schema([
-
                 Forms\Components\Select::make('criteria_id')
                     ->searchable()
                     ->relationship('criteria', 'description')
@@ -63,26 +61,35 @@ class EvaluationResource extends Resource
             ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('criteria.description'),
-                Tables\Columns\TextColumn::make('evaluationCriteria.note')->label('Note')->avg('evaluationCriteria','note'),
-                Tables\Columns\TextColumn::make('evaluationCriteria.commentaire')->label('Commentaire'),
-            ])
+                Tables\Columns\TextColumn::make('criteria_description')
+                    ->label('Criteria Description')
+                    ->sortable()
+                    ->searchable(),
 
+                Tables\Columns\TextColumn::make('evaluationCriteria.note')
+                    ->label('Note')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('evaluationCriteria.commentaire')
+                    ->label('Commentaire')
+                    ->sortable(),
+            ])
             ->filters([
                 SelectFilter::make('brief_id')
                     ->label('Filtrer par Brief')
-                    ->options(
-
-                        \App\Models\Brief::pluck('name', 'id')->toArray()
-                    ),
+                    ->options(\App\Models\Brief::pluck('name', 'id')->toArray()),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()            ])
+                Tables\Actions\DeleteAction::make(),
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -99,7 +106,6 @@ class EvaluationResource extends Resource
 
     public static function getPages(): array
     {
-
         return [
             'index' => Pages\ListEvaluations::route('/'),
             'create' => Pages\CreateEvaluation::route('/create'),
