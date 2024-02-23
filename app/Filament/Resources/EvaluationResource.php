@@ -16,6 +16,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Nette\Utils\Type;
+use Spatie\Permission\Guard;
+use function Laravel\Prompts\note;
 
 class EvaluationResource extends Resource
 {
@@ -27,39 +29,56 @@ class EvaluationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('criteria_id')
-                    ->searchable()
-                    ->relationship('criteria', 'description')
-                    ->required()
-                    ->preload()
-                    ->searchable(),
+                Fieldset::make('Sélections')
+                    ->columns(2)
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->searchable()
+                            ->relationship('user', 'name')
+                            ->required()
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('brief_id')
+                            ->relationship('brief', 'name')
+                            ->required()
+                            ->preload()
+                            ->searchable(),
+                    ]),
 
-                Forms\Components\Select::make('user_id')
-                    ->searchable()
-                    ->relationship('user', 'name')
-                    ->required()
-                    ->preload()
-                    ->searchable(),
+                Fieldset::make('Évaluations')
+                    ->columns(3)
+                    ->schema([
+                        Forms\Components\Select::make('criteria_id')
+                            ->searchable()
+                            ->relationship('criteria', 'description')
+                            ->required()
+                            ->preload()
+                            ->searchable(),
 
-                Forms\Components\Select::make('brief_id')
-                    ->relationship('brief', 'name')
-                    ->required()
-                    ->preload()
-                    ->searchable(),
+                        Forms\Components\TextInput::make('note')
+                            ->numeric()
+                            ->minValue(1)
+                            ->maxValue(50)
+                            ->required(),
 
-                Forms\Components\TextInput::make('note')
-                    ->numeric()
-                    ->minValue(1)
-                    ->maxValue(50)
-                    ->required(),
+                        Forms\Components\Select::make('commentaire')
+                            ->searchable()
+                            ->relationship('criteria', 'commentaire')
+                            ->required()
+                            ->label("Commentaire")
+                            ->preload()
+                            ->searchable(),
+                    ]),
 
                 Forms\Components\RichEditor::make('commentaire_general_mandat')
-                    ->required(),
+                    ->required()
+                    ->label("Commentaire generale apprentis"),
 
                 Forms\Components\DatePicker::make('date_evaluation')
                     ->required(),
             ]);
     }
+
 
     /**
      * @throws \Exception

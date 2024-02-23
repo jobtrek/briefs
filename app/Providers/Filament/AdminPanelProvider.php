@@ -17,6 +17,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -32,9 +34,11 @@ class AdminPanelProvider extends PanelProvider
                 \ChrisReedIO\Socialment\SocialmentPlugin::make()
                     ->registerProvider('azure', 'fab-microsoft', 'Login avec Microsoft')
                     ->loginRoute('filament.staff.auth.login')
-
             ])
 
+            ->plugins([
+                FilamentBackgroundsPlugin::make(),
+            ])
 
             ->colors(['primary' => Color::Amber,
 
