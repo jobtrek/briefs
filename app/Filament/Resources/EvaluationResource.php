@@ -64,10 +64,8 @@ class EvaluationResource extends Resource
                         Forms\Components\Select::make('commentaire')
                             ->searchable()
                             ->relationship('criteria', 'commentaire')
-                            ->required()
                             ->label("Commentaire")
-                            ->preload()
-                            ->searchable(),
+                        ->preload()
                     ]),
 
                 Forms\Components\RichEditor::make('commentaire_general_mandat')
@@ -78,7 +76,6 @@ class EvaluationResource extends Resource
                     ->required(),
             ]);
     }
-
 
     /**
      * @throws \Exception
