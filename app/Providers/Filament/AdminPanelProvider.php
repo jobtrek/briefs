@@ -42,7 +42,6 @@ class AdminPanelProvider extends PanelProvider
 
             ->colors([
                 'primary' => '#7EAF3A',
-
             ])
             ->font('Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

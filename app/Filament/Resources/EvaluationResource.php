@@ -46,27 +46,38 @@ class EvaluationResource extends Resource
                     ]),
 
                 Fieldset::make('Évaluations')
-                    ->columns(3)
                     ->schema([
-                        Forms\Components\Select::make('criteria_id')
-                            ->searchable()
-                            ->relationship('criteria', 'description')
-                            ->required()
-                            ->preload()
-                            ->searchable(),
+                        Forms\Components\Repeater::make('evaluation_items')
+                                        ->schema([
+                                        Forms\Components\Select::make('criteria_id')
+                                            ->searchable()
+                                            ->relationship('criteria', 'description')
+                                            ->required()
+                                            ->preload()
+                                            ->searchable(),
 
-                        Forms\Components\TextInput::make('note')
-                            ->numeric()
-                            ->minValue(1)
-                            ->maxValue(50)
-                            ->required(),
+                                        Forms\Components\TextInput::make('note maximum')
+                                            ->numeric()
+                                            ->minValue(1)
+                                            ->maxValue(50)
+                                            ->required(),
 
-                        Forms\Components\Select::make('commentaire')
-                            ->searchable()
-                            ->relationship('criteria', 'commentaire')
-                            ->label("Commentaire")
-                        ->preload()
+                                        Forms\Components\TextInput::make('note')
+                                            ->numeric()
+                                            ->minValue(1)
+                                            ->maxValue(50)
+                                            ->required(),
+
+                                        Forms\Components\Select::make('commentaire')
+                                            ->searchable()
+                                            ->relationship('criteria', 'commentaire')
+                                            ->label("Commentaire")
+                                            ->preload(),
+                            ])
+                            ->defaultItems(2)
+                        ,
                     ]),
+
 
                 Forms\Components\RichEditor::make('commentaire_general_mandat')
                     ->required()
@@ -76,7 +87,6 @@ class EvaluationResource extends Resource
                     ->required(),
             ]);
     }
-
     /**
      * @throws \Exception
      */

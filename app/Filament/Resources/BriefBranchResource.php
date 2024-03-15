@@ -18,6 +18,8 @@ class BriefBranchResource extends Resource
     protected static ?string $model = BriefBranch::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static ?string $navigationGroup ='Mandats';
+
 
     public static function form(Form $form): Form
     {

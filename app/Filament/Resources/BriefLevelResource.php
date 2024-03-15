@@ -18,6 +18,8 @@ class BriefLevelResource extends Resource
     protected static ?string $model = BriefLevel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-line';
+    protected static ?string $navigationGroup ='Mandats';
+
 
     public static function form(Form $form): Form
     {
