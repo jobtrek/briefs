@@ -15,6 +15,7 @@ use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\View\View;
+use function Safe\ps_add_pdflink;
 
 class BriefResource extends Resource
 {
@@ -52,7 +53,8 @@ class BriefResource extends Resource
 
                 Forms\Components\FileUpload::make('attachment')
                     ->directory('form-attachments')
-                    ->required()->openable(),
+                    ->required()->openable()
+                    ->reactive(),
 
             ]);
     }
@@ -67,9 +69,10 @@ class BriefResource extends Resource
                 Tables\Columns\TextColumn::make('attachment')
                     ->sortable()
                     ->label('PDF Attachment.')
-                    ->icon('heroicon-o-arrow-down-tray')
+                    ->icon('heroicon-o-folder-arrow-down')
                     ->iconPosition(IconPosition::Before)
                     ->iconColor('primary'),
+
                 Tables\Columns\TextColumn::make('year')->sortable()->alignCenter(),
 
             ])
@@ -80,6 +83,7 @@ class BriefResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

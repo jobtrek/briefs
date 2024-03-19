@@ -7,6 +7,7 @@ use App\Filament\Resources\EvaluationResource\RelationManagers;
 use App\Models\Evaluation;
 use Faker\Core\Number;
 use Faker\Provider\ar_EG\Text;
+use Filament\Actions\DeleteAction;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
@@ -40,12 +41,14 @@ class EvaluationResource extends Resource
                             ->relationship('user', 'name')
                             ->required()
                             ->preload()
-                            ->searchable(),
+                            ->searchable()
+                            ,
                         Forms\Components\Select::make('brief_id')
                             ->relationship('brief', 'name')
                             ->required()
                             ->preload()
-                            ->searchable(),
+                            ->searchable()
+                            ,
                     ]),
 
                 Fieldset::make('Évaluations')
@@ -63,28 +66,34 @@ class EvaluationResource extends Resource
                                     ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
-                                    ->required(),
+                                    ->required()
+                                ,
                                 Forms\Components\TextInput::make('note')
                                     ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
-                                    ->required(),
-                                Forms\Components\Select::make('commentaire')
-                                    ->searchable()
-                                    ->relationship('criteria', 'commentaire')
-                                    ->label("Commentaire")
-                                    ->preload(),
+                                    ->required()
+                                ,
+                                Forms\Components\TextInput::make('commentaire')
+                                    ->required()
+                                    ->maxLength(250)
+                               ,
                             ])
                             ->defaultItems(3),
                     ]),
 
-                Forms\Components\RichEditor::make('commentaire_general_mandat')
-                    ->required()
-                    ->label("Commentaire generale apprentis"),
-
-                Forms\Components\DatePicker::make('date_evaluation')
-                    ->required(),
-
+                Fieldset::make('Informations générales')
+                    ->schema([
+                        Forms\Components\Textarea::make('commentaire_general_mandat')
+                            ->required()
+                            ->label("Commentaire générale apprentis")
+                            ->placeholder("Entrez votre commentaire ici...")
+                       ,
+                        Forms\Components\DatePicker::make('date_evaluation')
+                            ->required()
+                            ->label("Date d'évaluation")
+                         ,
+                    ]),
             ]);
     }
 
@@ -95,19 +104,14 @@ class EvaluationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('criteria_description')
-                    ->label('Criteria Description')
-                    ->sortable()
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Apprentis')
                     ->searchable(),
-
-                Tables\Columns\TextColumn::make('evaluationCriteria.note')
-                    ->label('Note')
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('evaluationCriteria.commentaire')
-                    ->label('Commentaire')
-                    ->sortable(),
-
+                TextColumn::make('brief.name')
+                ->label('mandats')
+                    ->searchable(),
+                TextColumn::make('commentaire_general_mandat')
+                    ->label('Commentaire géneral')
             ])
             ->filters([
                 SelectFilter::make('brief_id')
@@ -115,7 +119,6 @@ class EvaluationResource extends Resource
                     ->options(\App\Models\Brief::pluck('name', 'id')->toArray()),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

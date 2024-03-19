@@ -10,10 +10,11 @@ class Evaluation extends Model
     use HasFactory;
 
     protected $fillable = [
+
         'date_evaluation',
         'brief_id',
         'criteria_id',
-        'user',
+        'user_id',
         'commentaire_general_mandat',
     ];
     private mixed $criteria;

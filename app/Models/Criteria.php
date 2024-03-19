@@ -16,6 +16,7 @@ class Criteria extends Model
         'description',
         'evaluation',
         'brief_id',
+        'commentaire',
         "evaluation_criteria_id"
 
     ];
