@@ -18,6 +18,8 @@ class EvaluationCriteriaResource extends Resource
     protected static ?string $model = EvaluationCriteria::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup ='Evaluations';
+
 
     public static function form(Form $form): Form
     {

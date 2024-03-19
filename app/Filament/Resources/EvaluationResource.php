@@ -6,11 +6,14 @@ use App\Filament\Resources\EvaluationResource\Pages;
 use App\Filament\Resources\EvaluationResource\RelationManagers;
 use App\Models\Evaluation;
 use Faker\Core\Number;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,19 +21,19 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Nette\Utils\Type;
 use Spatie\Permission\Guard;
 use function Laravel\Prompts\note;
+use Filament\Tables\Columns\Summarizers\Average;
 
 class EvaluationResource extends Resource
 {
     protected static ?string $model = Evaluation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-chart-bar';
-
+    protected static ?string $navigationGroup ='Evaluations';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Fieldset::make('Sélections')
-                    ->columns(2)
                     ->schema([
                         Forms\Components\Select::make('user_id')
                             ->searchable()
@@ -47,37 +50,33 @@ class EvaluationResource extends Resource
 
                 Fieldset::make('Évaluations')
                     ->schema([
-                        Forms\Components\Repeater::make('evaluation_items')
-                                        ->schema([
-                                        Forms\Components\Select::make('criteria_id')
-                                            ->searchable()
-                                            ->relationship('criteria', 'description')
-                                            ->required()
-                                            ->preload()
-                                            ->searchable(),
-
-                                        Forms\Components\TextInput::make('note maximum')
-                                            ->numeric()
-                                            ->minValue(1)
-                                            ->maxValue(50)
-                                            ->required(),
-
-                                        Forms\Components\TextInput::make('note')
-                                            ->numeric()
-                                            ->minValue(1)
-                                            ->maxValue(50)
-                                            ->required(),
-
-                                        Forms\Components\Select::make('commentaire')
-                                            ->searchable()
-                                            ->relationship('criteria', 'commentaire')
-                                            ->label("Commentaire")
-                                            ->preload(),
+                        Forms\Components\Repeater::make('une new evaluation')
+                            ->columnSpan(4)
+                            ->schema([
+                                Forms\Components\Select::make('criteria_id')
+                                    ->searchable()
+                                    ->relationship('criteria', 'description')
+                                    ->required()
+                                    ->preload()
+                                    ->searchable(),
+                                Forms\Components\TextInput::make('note maximum')
+                                    ->numeric()
+                                    ->minValue(1)
+                                    ->maxValue(50)
+                                    ->required(),
+                                Forms\Components\TextInput::make('note')
+                                    ->numeric()
+                                    ->minValue(1)
+                                    ->maxValue(50)
+                                    ->required(),
+                                Forms\Components\Select::make('commentaire')
+                                    ->searchable()
+                                    ->relationship('criteria', 'commentaire')
+                                    ->label("Commentaire")
+                                    ->preload(),
                             ])
-                            ->defaultItems(2)
-                        ,
+                            ->defaultItems(3),
                     ]),
-
 
                 Forms\Components\RichEditor::make('commentaire_general_mandat')
                     ->required()
@@ -85,9 +84,11 @@ class EvaluationResource extends Resource
 
                 Forms\Components\DatePicker::make('date_evaluation')
                     ->required(),
+
             ]);
     }
-    /**
+
+    /**w
      * @throws \Exception
      */
     public static function table(Table $table): Table
@@ -106,6 +107,7 @@ class EvaluationResource extends Resource
                 Tables\Columns\TextColumn::make('evaluationCriteria.commentaire')
                     ->label('Commentaire')
                     ->sortable(),
+
             ])
             ->filters([
                 SelectFilter::make('brief_id')
