@@ -14,6 +14,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\Summarizers\Range;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -62,7 +63,7 @@ class EvaluationResource extends Resource
                                     ->required()
                                     ->preload()
                                     ->searchable(),
-                                Forms\Components\TextInput::make('note maximum')
+                                Forms\Components\TextInput::make('note_max')
                                     ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
@@ -79,7 +80,7 @@ class EvaluationResource extends Resource
                                     ->maxLength(250)
                                ,
                             ])
-                            ->defaultItems(3),
+                            ->defaultItems(1),
                     ]),
 
                 Fieldset::make('Informations générales')
@@ -108,10 +109,11 @@ class EvaluationResource extends Resource
                     ->label('Apprentis')
                     ->searchable(),
                 TextColumn::make('brief.name')
-                ->label('mandats')
+                    ->label('mandats')
                     ->searchable(),
                 TextColumn::make('commentaire_general_mandat')
-                    ->label('Commentaire géneral')
+                    ->label('Commentaire général'),
+
             ])
             ->filters([
                 SelectFilter::make('brief_id')
@@ -119,7 +121,7 @@ class EvaluationResource extends Resource
                     ->options(\App\Models\Brief::pluck('name', 'id')->toArray()),
             ])
             ->actions([
-                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -127,7 +129,6 @@ class EvaluationResource extends Resource
                 ]),
             ]);
     }
-
     public static function getRelations(): array
     {
         return [

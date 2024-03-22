@@ -14,6 +14,7 @@ class EvaluationCriteria extends Model
     protected $fillable = [
         'criteria_id',
         'note',
+        'note_max',
         'commentaire',
 
 
