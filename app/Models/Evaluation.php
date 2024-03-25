@@ -19,7 +19,6 @@ class Evaluation extends Model
         'note_max',
         'commentaire_general_mandat',
     ];
-    private mixed $criteria;
 
     protected static function booted(): void
     {
@@ -52,5 +51,9 @@ class Evaluation extends Model
     public function getCriteriaDescriptionAttribute()
     {
         return optional($this->criteria)->description;
+    }
+    public function evaluationCriteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(EvaluationCriteria::class, 'criteria_id');
     }
 }

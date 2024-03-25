@@ -8,4 +8,3 @@
  alt="logo jobtrek"
 
 >
-

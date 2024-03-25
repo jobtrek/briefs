@@ -54,8 +54,8 @@ class EvaluationResource extends Resource
 
                 Fieldset::make('Évaluations')
                     ->schema([
-                        Forms\Components\Repeater::make('une new evaluation')
-                            ->columnSpan(4)
+                        Forms\Components\Repeater::make('evaluations')
+                        ->columnSpan(4)
                             ->schema([
                                 Forms\Components\Select::make('criteria_id')
                                     ->searchable()
@@ -64,21 +64,18 @@ class EvaluationResource extends Resource
                                     ->preload()
                                     ->searchable(),
                                 Forms\Components\TextInput::make('note_max')
-                                    ->numeric()
+                                ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
-                                    ->required()
-                                ,
+                                    ->required(),
                                 Forms\Components\TextInput::make('note')
                                     ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
-                                    ->required()
-                                ,
+                                    ->required(),
                                 Forms\Components\TextInput::make('commentaire')
                                     ->required()
-                                    ->maxLength(250)
-                               ,
+                                    ->maxLength(250),
                             ])
                             ->defaultItems(1),
                     ]),
@@ -114,6 +111,14 @@ class EvaluationResource extends Resource
                 TextColumn::make('commentaire_general_mandat')
                     ->label('Commentaire général'),
 
+
+                TextColumn::make('note')
+                ->label('Note')
+                    ->numeric()
+                    ->summarize([
+                        Average::make(),
+                        Range::make(),
+                    ])
             ])
             ->filters([
                 SelectFilter::make('brief_id')
