@@ -17,14 +17,16 @@ class StatsOverview extends BaseWidget
             Stat::make('Brief', Brief::query()->count())
                 ->description('Tous les mandats')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
-                ->chart([7,5,3,4,6])
+                ->chart([10,50,3,4,6])
                 ->color('success'),
+
             Stat::make('User', User::query()->count())
                 ->description('Tous les users')
-                ->chart([7,5,6,4,6,10])
+                ->chart([7,5,1,4,6,10])
                 ->color('success'),
         ];
 
     }
+
 
 }

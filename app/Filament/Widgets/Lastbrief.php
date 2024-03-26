@@ -4,6 +4,8 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\BriefResource;
 use App\Filament\Resources\BriefRealisationResource;
+use App\Filament\Resources\EvaluationResource;
+use App\Filament\Resources\UserResource;
 use App\Models\Brief;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -18,32 +20,39 @@ class Lastbrief extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(BriefResource::getEloquentQuery())
+            ->query(BriefRealisationResource::getEloquentQuery())
             ->defaultPaginationPageOption(5)
             ->columns([
-                Tables\Columns\TextColumn::make('briefrealisation.user.name')                     ->searchable()
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Date de publication')
+                    ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('name')
+
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Apprentis')
                     ->searchable()
                     ->sortable(),
 
-
-                Tables\Columns\TextColumn::make('mandats en cours ')
-                    ->label('mandats en cours')
+                Tables\Columns\TextColumn::make('brief.name')
                     ->searchable()
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('status')
                     ->badge(),
-                Tables\Columns\TextColumn::make('Date debut')
+                Tables\Columns\TextColumn::make('date_debut')
                     ->searchable()
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('Date fin')
+                Tables\Columns\TextColumn::make('date_fin')
                     ->searchable()
                     ->date()
                     ->sortable(),
             ])
+
+
+
+
             ->actions([
             ]);
     }

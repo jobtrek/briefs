@@ -59,7 +59,10 @@ class BriefRealisationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('brief.name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('brief.name')
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('user.name'),
                 Tables\Columns\TextColumn::make('date_debut'),
                 Tables\Columns\TextColumn::make('date_fin'),
@@ -87,14 +90,14 @@ class BriefRealisationResource extends Resource
         ];
     }
 
+
     public static function getNavigationBadge(): ?string
     {
         /** @var class-string<Model> $modelClass */
         $modelClass = static::$model;
 
-        return (string) $modelClass::where('status', 'new')->count();
+        return (string) $modelClass::with('status', 'new')->count();
     }
-
     public static function getPages(): array
     {
         return [

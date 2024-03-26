@@ -112,13 +112,7 @@ class EvaluationResource extends Resource
                     ->label('Commentaire général'),
 
 
-                TextColumn::make('note')
-                ->label('Note')
-                    ->numeric()
-                    ->summarize([
-                        Average::make(),
-                        Range::make(),
-                    ])
+
             ])
             ->filters([
                 SelectFilter::make('brief_id')
