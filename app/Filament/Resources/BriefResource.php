@@ -68,7 +68,7 @@ class BriefResource extends Resource
                 Tables\Columns\TextColumn::make('briefLevel.number')->sortable(),
                 Tables\Columns\TextColumn::make('attachment')
                     ->sortable()
-                    ->label('PDF Attachment.')
+                    ->label('PDF')
                     ->icon('heroicon-o-folder-arrow-down')
                     ->iconPosition(IconPosition::Before)
                     ->iconColor('primary'),
@@ -83,6 +83,7 @@ class BriefResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+
 
             ])
             ->bulkActions([

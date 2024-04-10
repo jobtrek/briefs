@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CriteriaResource extends Resource
 {
     protected static ?string $model = Criteria::class;
+    protected static ?string $navigationGroup ='Mandats';
 
     protected static ?string $navigationIcon = 'heroicon-o-document-plus';
 

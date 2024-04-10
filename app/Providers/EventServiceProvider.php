@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use App\Observers\TaskObserver;
 
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;

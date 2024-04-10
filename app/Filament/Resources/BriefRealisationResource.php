@@ -7,6 +7,7 @@ use App\Filament\Resources\BriefRealisationResource\Pages;
 use App\Filament\Resources\BriefRealisationResource\RelationManagers;
 use App\Models\BriefRealisation;
 use Filament\Forms;
+use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Grid;
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class BriefRealisationResource extends Resource
 {
     protected static ?string $model = BriefRealisation::class;
+    protected static ?string $navigationGroup ='Mandats';
 
 
     protected static ?string $navigationIcon = 'heroicon-o-document-check';
