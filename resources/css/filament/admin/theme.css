@@ -2,7 +2,7 @@
 
 @config 'tailwind.config.js';
 
-
-:root {
-    --f-primary-600: #fc0707;
+.fi-simple-layout {
+    @apply bg-cover bg-center bg-no-repeat w-full h-full;
+    background-image: url('/img/jobtrekv.jpg');
 }

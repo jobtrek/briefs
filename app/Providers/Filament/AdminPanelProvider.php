@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->defaultThemeMode(ThemeMode::Dark)
+            ->viteTheme('resources/css/filament/admin/theme.css')
         ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,
@@ -55,6 +55,8 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => '#7EAF3A',
             ])
+
+
             ->font('Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

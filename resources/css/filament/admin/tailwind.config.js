@@ -7,12 +7,4 @@ export default {
         './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
     ],
-
-    theme: {
-        extend: {
-            colors: {
-                custom: '#CC2E52',
-            },
-        },
-    },
 }
