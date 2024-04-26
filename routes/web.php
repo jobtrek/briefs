@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Resources\PublicMandatResource;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -17,6 +18,8 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 
 Route::get('/login/azure/redirect', function () {
     return Socialite::driver('azure')->redirect();

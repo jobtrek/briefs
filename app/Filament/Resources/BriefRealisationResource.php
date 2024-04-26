@@ -4,75 +4,76 @@ namespace App\Filament\Resources;
 
 use App\Enums\BriefStatus;
 use App\Filament\Resources\BriefRealisationResource\Pages;
-use App\Filament\Resources\BriefRealisationResource\RelationManagers;
 use App\Models\BriefRealisation;
 use Filament\Forms;
-use Filament\Forms\Components\MultiSelect;
-use Filament\Forms\Components\Radio;
-use Filament\Forms\Form;
-use Filament\Infolists\Components\Grid;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BriefRealisationResource extends Resource
 {
     protected static ?string $model = BriefRealisation::class;
-    protected static ?string $navigationGroup ='Mandats';
-
-
+    protected static ?string $navigationGroup = 'Mandats';
     protected static ?string $navigationIcon = 'heroicon-o-document-check';
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('brief_id')
+                Select::make('brief_id')
                     ->relationship('brief', 'name')
                     ->required()
                     ->preload()
                     ->searchable(),
-
-                Forms\Components\Select::make('user_id')
+                Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required()
                     ->preload()
                     ->searchable(),
-
-                Forms\Components\DateTimePicker::make('date_debut')
+                DateTimePicker::make('date_debut')
                     ->required(),
-
-                Forms\Components\DateTimePicker::make('date_fin')
+                DateTimePicker::make('date_fin')
                     ->required(),
-
-                Forms\Components\ToggleButtons::make('status')
+                ToggleButtons::make('status')
                     ->inline()
                     ->options(BriefStatus::class)
                     ->required(),
-
-
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('brief.name')
+                TextColumn::make('brief.name')
                     ->sortable()
                     ->searchable(),
-
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('date_debut'),
-                Tables\Columns\TextColumn::make('date_fin'),
-                Tables\Columns\TextColumn::make('status')
+                TextColumn::make('user.name'),
+                TextColumn::make('date_debut'),
+                TextColumn::make('date_fin'),
+                TextColumn::make('status')
                     ->badge(),
             ])
             ->filters([
-                //
+                Filter::make('user')
+                    ->form([
+                        Select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->preload()
+                            ->searchable(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            $data['user_id'],
+                            fn (Builder $query, $userId) => $query->whereRelation('user', 'id', $userId),
+                        );
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -92,14 +93,11 @@ class BriefRealisationResource extends Resource
         ];
     }
 
-
     public static function getNavigationBadge(): ?string
     {
-        /** @var class-string<Model> $modelClass */
-        $modelClass = static::$model;
-
-        return (string) $modelClass::with('status', 'new')->count();
+        return (string) BriefRealisation::count();
     }
+
     public static function getPages(): array
     {
         return [

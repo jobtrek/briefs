@@ -103,7 +103,7 @@ class EvaluationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
+                TextColumn::make('user.name')
                     ->label('Apprentis')
                     ->searchable(),
                 TextColumn::make('brief.name')
@@ -111,8 +111,8 @@ class EvaluationResource extends Resource
                     ->searchable(),
                 TextColumn::make('commentaire_general_mandat')
                     ->label('Commentaire général'),
-
-
+                TextColumn::make('note')
+                    ->label('Moyenne des notes')
 
             ])
             ->filters([

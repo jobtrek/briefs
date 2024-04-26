@@ -67,14 +67,12 @@ class BriefResource extends Resource
                 Tables\Columns\TextColumn::make('briefBranch.name')->sortable(),
                 Tables\Columns\TextColumn::make('briefLevel.number')->sortable(),
                 Tables\Columns\TextColumn::make('attachment')
-                    ->sortable()
                     ->label('PDF')
-                    ->icon('heroicon-o-folder-arrow-down')
-                    ->iconPosition(IconPosition::Before)
-                    ->iconColor('primary'),
-
-                Tables\Columns\TextColumn::make('year')->sortable()->alignCenter(),
-
+                    ->url(fn ($record) => asset('storage/' . $record->attachment))
+                    ->html(fn ($record) => view('vendor.filament-panels.components.pdf-icon', [
+                        'url' => asset('storage/' . $record->attachment)
+                    ]))
+                    ->openUrlInNewTab(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('briefBranch')
@@ -83,8 +81,6 @@ class BriefResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
