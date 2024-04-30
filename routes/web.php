@@ -15,9 +15,8 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
 
 
 
