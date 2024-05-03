@@ -14,13 +14,18 @@ class EvaluationCriteria extends Model
     protected $fillable = [
         'criteria_id',
         'note',
+        'note_max',
         'commentaire',
-
 
     ];
 
     public function criteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Criteria::class);
+    }
+
+    public function evaluation(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Evaluation::class, 'criteria_id');
     }
 }

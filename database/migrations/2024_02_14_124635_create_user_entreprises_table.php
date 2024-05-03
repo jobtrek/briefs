@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('criterias', function (Blueprint $table) {
+        Schema::create('user_entreprises', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
-            $table->foreignId('brief_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('entreprise_id')->constrained();
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('criterias');
+        Schema::dropIfExists('user_entreprises');
     }
 };

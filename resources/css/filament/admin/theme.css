@@ -1,0 +1,8 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+.fi-simple-layout {
+    @apply bg-cover bg-center bg-no-repeat w-full h-full;
+    background-image: url('/img/jobtrekv.jpg');
+}

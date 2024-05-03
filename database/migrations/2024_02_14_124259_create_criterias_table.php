@@ -9,23 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-
     public function up(): void
     {
-        Schema::create('evaluation_criterias', function (Blueprint $table) {
-            $table->id('id_criter_eval');
-            $table->foreignId('id_criteria')->constrained('criterias')->onDelete('cascade');
-            $table->integer('note')->nullable();
-            $table->text('commentaire')->nullable();
+        Schema::create('criterias', function (Blueprint $table) {
+            $table->id();
+            $table->text('description');
+            $table->text('commentaire');
+            $table->foreignId('brief_id')->constrained();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('evaluation_criteria');
+        Schema::dropIfExists('criterias');
     }
 };

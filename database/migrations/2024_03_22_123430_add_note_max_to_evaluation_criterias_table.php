@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('briefs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('brief_branch_id')->constrained();
-            $table->foreignId('brief_level_id')->constrained();
-            $table->timestamps();
+        Schema::table('evaluation_criterias', function (Blueprint $table) {
+            $table->integer('note_max')->default(50);
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('briefs');
+        Schema::table('evaluation_criterias', function (Blueprint $table) {
+            $table->dropColumn('note_max');
+        });
     }
 };
