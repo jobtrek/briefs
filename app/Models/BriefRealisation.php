@@ -35,28 +35,5 @@ class BriefRealisation extends Model
     {
         return $this->belongsTo(Brief::class);
     }
-    public static function booted()
-    {
-        static::creating(function ($model) {
-            $model->validateUniqueBriefUser();
-        });
 
-        static::updating(function ($model) {
-            $model->validateUniqueBriefUser();
-        });
-    }
-
-    protected function validateUniqueBriefUser()
-    {
-        $this->validate([
-            'brief_id' => [
-                'required',
-                Rule::unique('brief_realisations')->where(function ($query) {
-                    return $query->where('user_id', $this->user_id);
-                }),
-            ],
-        ], [
-            'brief_id.unique' => 'Ce brief a déjà été associé à cet utilisateur.',
-        ]);
-    }
 }

@@ -50,7 +50,6 @@ class BriefResource extends Resource
                     ->options(['1' => 'Year 1', '2' => 'Year 2', '3' => 'Year 3'])
                     ->required()
                 ,
-
                 Forms\Components\FileUpload::make('attachment')
                     ->directory('form-attachments')
                     ->required()->openable()

@@ -12,4 +12,9 @@ class WelcomeController extends Controller
         //dd(compact('briefs'));
         return view('welcome', compact('briefs'));
     }
+
+
 }
+
+
+

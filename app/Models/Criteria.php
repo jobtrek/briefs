@@ -30,8 +30,8 @@ class Criteria extends Model
         return $this->hasOne(evaluationCriteria::class, 'id_criteria');
     }
 
-    public function evaluations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function Evaluation(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Evaluation::class, 'id_critere');
+        return $this->hasMany(Evaluation::class, 'criteria_id');
     }
 }

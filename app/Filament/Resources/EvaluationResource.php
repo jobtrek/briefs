@@ -72,6 +72,7 @@ class EvaluationResource extends Resource
                                     ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
+
                                     ->required(),
                                 Forms\Components\TextInput::make('commentaire')
                                     ->required()
@@ -80,7 +81,7 @@ class EvaluationResource extends Resource
                             ->defaultItems(1),
                     ]),
 
-                Fieldset::make('Informations générales')
+        Fieldset::make('Informations générales')
                     ->schema([
                         Forms\Components\Textarea::make('commentaire_general_mandat')
                             ->required()
@@ -94,6 +95,7 @@ class EvaluationResource extends Resource
                          ,
                     ]),
             ]);
+
     }
 
     /**w
@@ -105,6 +107,7 @@ class EvaluationResource extends Resource
             ->columns([
                 TextColumn::make('user.name')
                     ->label('Apprentis')
+
                     ->searchable(),
                 TextColumn::make('brief.name')
                     ->label('mandats')
@@ -112,7 +115,10 @@ class EvaluationResource extends Resource
                 TextColumn::make('commentaire_general_mandat')
                     ->label('Commentaire général'),
                 TextColumn::make('note')
-                    ->label('Moyenne des notes')
+                    ->label('Moyenne des notes'),
+                 TextColumn::make('average_note')
+                     ->label('Moyenne des notes (%)')
+                     ->formatStateUsing(fn ($state) => $state > 80 ? 'success' : ($state > 60 ? 'warning' : 'danger')),
 
             ])
             ->filters([

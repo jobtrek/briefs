@@ -18,8 +18,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
 
-
-
 Route::get('/login/azure/redirect', function () {
     return Socialite::driver('azure')->redirect();
 });

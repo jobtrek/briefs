@@ -19,20 +19,6 @@ class Evaluation extends Model
         'note_max',
         'commentaire_general_mandat',
     ];
-
-    protected static function booted(): void
-    {
-        static::created(function ($evaluation) {
-            DB::table('evaluation_criterias')->insert([
-                'criteria_id' => $evaluation->criteria_id,
-                'note' => $evaluation->note,
-                'note_max' => $evaluation->note_max,
-                'commentaire' => $evaluation->commentaire_general_mandat,
-                'updated_at' => now(),
-            ]);
-        });
-    }
-
     public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Brief::class);
@@ -55,5 +41,17 @@ class Evaluation extends Model
     public function evaluationCriteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(EvaluationCriteria::class, 'criteria_id');
+    }
+    public function getAverageNoteAttribute(): float|int
+    {
+        $evaluationCriterias = $this->evaluationCriteria()->get();
+        $totalNotes = $evaluationCriterias->sum('note');
+        $totalMaxNotes = $evaluationCriterias->sum('note_max');
+
+        if ($totalMaxNotes > 0) {
+            return round(($totalNotes / $totalMaxNotes) * 100, 2);
+        }
+
+        return 0;
     }
 }
