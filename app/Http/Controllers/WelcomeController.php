@@ -16,5 +16,3 @@ class WelcomeController extends Controller
 
 }
 
-
-

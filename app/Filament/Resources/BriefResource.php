@@ -3,26 +3,19 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BriefResource\Pages;
-use App\Filament\Resources\BriefResource\RelationManagers;
 use App\Models\Brief;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\IconPosition;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Tables\Actions\Action;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\View\View;
-use function Safe\ps_add_pdflink;
 
 class BriefResource extends Resource
 {
     protected static ?string $model = Brief::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
-    protected static ?string $navigationGroup ='Mandats';
+    protected static ?string $navigationGroup = 'Mandats';
 
     public static function form(Form $form): Form
     {
@@ -45,16 +38,13 @@ class BriefResource extends Resource
                     ->required()
                     ->preload()
                     ->searchable(),
-
                 Forms\Components\Select::make('year')
                     ->options(['1' => 'Year 1', '2' => 'Year 2', '3' => 'Year 3'])
-                    ->required()
-                ,
+                    ->required(),
                 Forms\Components\FileUpload::make('attachment')
                     ->directory('form-attachments')
                     ->required()->openable()
                     ->reactive(),
-
             ]);
     }
 
@@ -65,13 +55,10 @@ class BriefResource extends Resource
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('briefBranch.name')->sortable(),
                 Tables\Columns\TextColumn::make('briefLevel.number')->sortable(),
-                Tables\Columns\TextColumn::make('attachment')
+                Tables\Columns\IconColumn::make('attachment')
                     ->label('PDF')
-                    ->url(fn ($record) => asset('storage/' . $record->attachment))
-                    ->html(fn ($record) => view('vendor.filament-panels.components.pdf-icon', [
-                        'url' => asset('storage/' . $record->attachment)
-                    ]))
-                    ->openUrlInNewTab(),
+                    ->trueIcon('heroicon-o-document')
+                    ->url(fn ($record) => asset('storage/' . $record->attachment), shouldOpenInNewTab: true)
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('briefBranch')
@@ -88,13 +75,10 @@ class BriefResource extends Resource
             ]);
     }
 
-
     public static function getRelations(): array
     {
-        return [
-        ];
+        return [];
     }
-
 
     public static function getPages(): array
     {
