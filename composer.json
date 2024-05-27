@@ -19,6 +19,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.8",
+        "saade/filament-fullcalendar": "^3.0",
         "socialiteproviders/microsoft-azure": "^5.1",
         "swisnl/filament-backgrounds": "^1.1"
     },

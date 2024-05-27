@@ -43,19 +43,19 @@ class EvaluationResource extends Resource
                             ->required()
                             ->preload()
                             ->searchable()
-                            ,
+                        ,
                         Forms\Components\Select::make('brief_id')
                             ->relationship('brief', 'name')
                             ->required()
                             ->preload()
                             ->searchable()
-                            ,
+                        ,
                     ]),
 
                 Fieldset::make('Évaluations')
                     ->schema([
                         Forms\Components\Repeater::make('evaluations')
-                        ->columnSpan(4)
+                            ->columnSpan(4)
                             ->schema([
                                 Forms\Components\Select::make('criteria_id')
                                     ->searchable()
@@ -64,7 +64,7 @@ class EvaluationResource extends Resource
                                     ->preload()
                                     ->searchable(),
                                 Forms\Components\TextInput::make('note_max')
-                                ->numeric()
+                                    ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
                                     ->required(),
@@ -81,18 +81,18 @@ class EvaluationResource extends Resource
                             ->defaultItems(1),
                     ]),
 
-        Fieldset::make('Informations générales')
+                Fieldset::make('Informations générales')
                     ->schema([
                         Forms\Components\Textarea::make('commentaire_general_mandat')
                             ->required()
                             ->label("Commentaire générale apprentis")
                             ->placeholder("Entrez votre commentaire ici...")
-                       ,
+                        ,
                         Forms\Components\DatePicker::make('date_evaluation')
                             ->required()
                             ->label("Date d'évaluation")
 
-                         ,
+                        ,
                     ]),
             ]);
 
@@ -116,9 +116,9 @@ class EvaluationResource extends Resource
                     ->label('Commentaire général'),
                 TextColumn::make('note')
                     ->label('Moyenne des notes'),
-                 TextColumn::make('average_note')
-                     ->label('Moyenne des notes (%)')
-                     ->formatStateUsing(fn ($state) => $state > 80 ? 'success' : ($state > 60 ? 'warning' : 'danger')),
+                TextColumn::make('average_note')
+                    ->label('Moyenne des notes (%)')
+                    ->formatStateUsing(fn ($state) => $state > 80 ? 'success' : ($state > 60 ? 'warning' : 'danger')),
 
             ])
             ->filters([

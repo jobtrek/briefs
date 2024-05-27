@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use function Filament\Support\get_color_css_variables;
 use function Psy\debug;
@@ -41,7 +42,9 @@ class AdminPanelProvider extends PanelProvider
                 'success' => Color::Emerald,
                 'warning' => Color::Orange,
             ])
-            ->plugins([
+
+            ->plugins([FilamentFullCalendarPlugin::make()])
+        ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \ChrisReedIO\Socialment\SocialmentPlugin::make()
                     ->registerProvider('azure', 'fab-microsoft', 'Login avec Microsoft')

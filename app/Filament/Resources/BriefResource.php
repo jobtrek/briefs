@@ -53,8 +53,9 @@ class BriefResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('briefBranch.name')->sortable(),
-                Tables\Columns\TextColumn::make('briefLevel.number')->sortable(),
+                Tables\Columns\TextColumn::make('briefBranch.name')->sortable()->label('Branche'),
+                Tables\Columns\TextColumn::make('year')->sortable()->label('Année'),
+                Tables\Columns\TextColumn::make('briefLevel.number')->sortable()->label('Niveau'),
                 Tables\Columns\IconColumn::make('attachment')
                     ->label('PDF')
                     ->trueIcon('heroicon-o-document')

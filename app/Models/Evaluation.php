@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Evaluation extends Model
 {
@@ -12,46 +11,19 @@ class Evaluation extends Model
 
     protected $fillable = [
         'date_evaluation',
-        'brief_id',
-        'criteria_id',
-        'user_id',
-        'note',
-        'note_max',
         'commentaire_general_mandat',
+        'brief_id',
+        'user_id',
     ];
-    public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+
+    public function evaluation(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Brief::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function criteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Criteria::class);
-    }
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function criteria(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function getCriteriaDescriptionAttribute()
-    {
-        return optional($this->criteria)->description;
-    }
-    public function evaluationCriteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(EvaluationCriteria::class, 'criteria_id');
-    }
-    public function getAverageNoteAttribute(): float|int
-    {
-        $evaluationCriterias = $this->evaluationCriteria()->get();
-        $totalNotes = $evaluationCriterias->sum('note');
-        $totalMaxNotes = $evaluationCriterias->sum('note_max');
-
-        if ($totalMaxNotes > 0) {
-            return round(($totalNotes / $totalMaxNotes) * 100, 2);
-        }
-
-        return 0;
+        return $this->hasMany(EvaluationCriteria::class);
     }
 }
