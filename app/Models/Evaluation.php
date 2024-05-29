@@ -10,20 +10,24 @@ class Evaluation extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
+        'brief_id',
         'date_evaluation',
         'commentaire_general_mandat',
-        'brief_id',
-        'user_id',
     ];
-
-    public function evaluation(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
 
     public function criteria(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(EvaluationCriteria::class);
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Brief::class);
     }
 }

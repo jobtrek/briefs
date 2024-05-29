@@ -22,6 +22,7 @@ use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use function Filament\Support\get_color_css_variables;
 use function Psy\debug;
+use function Symfony\Component\String\s;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -43,13 +44,17 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Orange,
             ])
 
-            ->plugins([FilamentFullCalendarPlugin::make()])
+            ->plugins([
+                FilamentFullCalendarPlugin::make()
+            ])
         ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \ChrisReedIO\Socialment\SocialmentPlugin::make()
                     ->registerProvider('azure', 'fab-microsoft', 'Login avec Microsoft')
                     ->loginRoute('filament.staff.auth.login')
             ])
+
+
 
             ->plugins([
                 FilamentBackgroundsPlugin::make(),
@@ -58,7 +63,6 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => '#7EAF3A',
             ])
-
 
             ->font('Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

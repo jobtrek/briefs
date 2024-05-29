@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,18 +12,14 @@ class EvaluationCriteria extends Model
 
     protected $fillable = [
         'evaluation_id',
-        'criteria_id',
+        'criteria',
         'note',
+        'note_max',
         'commentaire',
     ];
 
     public function evaluation(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Evaluation::class);
-    }
-
-    public function criteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Criteria::class);
     }
 }

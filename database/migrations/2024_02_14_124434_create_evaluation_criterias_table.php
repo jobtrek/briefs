@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('criteria_id')->constrained();
             $table->integer('note')->nullable();
+            $table->integer('note_max');
             $table->text('commentaire');
             $table->timestamps();
         });
