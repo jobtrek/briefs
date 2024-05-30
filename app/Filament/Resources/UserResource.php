@@ -8,6 +8,7 @@ use App\Models\User;
 use Filament\Tables;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class UserResource extends \Filament\Resources\Resource
@@ -47,7 +48,11 @@ class UserResource extends \Filament\Resources\Resource
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('username')
+                    ->label('Username')
+                    ->options(function () {
+                        return User::all()->pluck('username', 'id')->toArray();
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

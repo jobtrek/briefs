@@ -3,77 +3,65 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EvaluationResource\Pages;
-use App\Filament\Resources\EvaluationResource\RelationManagers;
 use App\Models\Evaluation;
-use Faker\Core\Number;
-use Faker\Provider\ar_EG\Text;
-use Filament\Actions\DeleteAction;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\Summarizers\Range;
+use Filament\Tables\Columns\Summarizers\Average;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Nette\Utils\Type;
-use Spatie\Permission\Guard;
-use function Laravel\Prompts\note;
-use Filament\Tables\Columns\Summarizers\Average;
 
 class EvaluationResource extends Resource
 {
     protected static ?string $model = Evaluation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-chart-bar';
-    protected static ?string $navigationGroup ='Evaluations';
-    public static function form(Form $form): Form
+    protected static ?string $navigationGroup = 'Evaluations';
+
+    public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
                 Fieldset::make('Sélections')
                     ->schema([
                         Forms\Components\Select::make('user_id')
-                            ->searchable()
                             ->relationship('user', 'name')
-                            ->required()
-                            ->preload()
                             ->searchable()
-                        ,
+                            ->required()
+                            ->preload(),
+
                         Forms\Components\Select::make('brief_id')
                             ->relationship('brief', 'name')
-                            ->required()
-                            ->preload()
                             ->searchable()
-                        ,
+                            ->required()
+                            ->preload(),
                     ]),
 
                 Fieldset::make('Évaluations')
                     ->schema([
-                        Forms\Components\Repeater::make('evaluations')
-                            ->columnSpan(4)
+                        Forms\Components\Repeater::make('criteria')
+                            ->relationship()
                             ->schema([
                                 Forms\Components\Select::make('criteria_id')
-                                    ->searchable()
                                     ->relationship('criteria', 'description')
                                     ->required()
                                     ->preload()
                                     ->searchable(),
+
                                 Forms\Components\TextInput::make('note_max')
                                     ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
                                     ->required(),
+
                                 Forms\Components\TextInput::make('note')
                                     ->numeric()
                                     ->minValue(1)
                                     ->maxValue(50)
-
                                     ->required(),
+
                                 Forms\Components\TextInput::make('commentaire')
                                     ->required()
                                     ->maxLength(250),
@@ -86,60 +74,50 @@ class EvaluationResource extends Resource
                         Forms\Components\Textarea::make('commentaire_general_mandat')
                             ->required()
                             ->label("Commentaire générale apprentis")
-                            ->placeholder("Entrez votre commentaire ici...")
-                        ,
+                            ->placeholder("Entrez votre commentaire ici..."),
+
                         Forms\Components\DatePicker::make('date_evaluation')
                             ->required()
-                            ->label("Date d'évaluation")
-
-                        ,
+                            ->label("Date d'évaluation"),
                     ]),
             ]);
-
     }
 
-    /**w
-     * @throws \Exception
-     */
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('user.name')
                     ->label('Apprentis')
+                    ->searchable(),
 
-                    ->searchable(),
                 TextColumn::make('brief.name')
-                    ->label('mandats')
+                    ->label('Mandats')
                     ->searchable(),
+
                 TextColumn::make('commentaire_general_mandat')
                     ->label('Commentaire général'),
-                TextColumn::make('note')
-                    ->label('Moyenne des notes'),
-                TextColumn::make('average_note')
-                    ->label('Moyenne des notes (%)')
-                    ->formatStateUsing(fn ($state) => $state > 80 ? 'success' : ($state > 60 ? 'warning' : 'danger')),
 
+                TextColumn::make('note')
+                    ->label('Moyenne des notes')
+                    ->getStateUsing(fn (Evaluation $record) => $record->average_note),
             ])
             ->filters([
-                SelectFilter::make('brief_id')
-                    ->label('Filtrer par Brief')
-                    ->options(\App\Models\Brief::pluck('name', 'id')->toArray()),
+                SelectFilter::make('user_id')
+                    ->label('Filtrer par Apprentis')
+                    ->options(\App\Models\User::pluck('name', 'id')->toArray()),
             ])
-            ->actions([
-
-            ])
+            ->actions([])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
+
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array

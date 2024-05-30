@@ -9,12 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-
     public function up(): void
     {
         Schema::create('evaluation_criterias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('criteria_id')->constrained();
+            $table->foreignId('criteria_id')->constrained()->onDelete('cascade');
+            $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
             $table->integer('note')->nullable();
             $table->integer('note_max');
             $table->text('commentaire');

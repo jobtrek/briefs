@@ -25,7 +25,7 @@ class CalendarWidget extends FullCalendarWidget
             })
             ->toArray();
     }
-    
+
     public static function canView(): bool
     {
         return false;

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,11 +15,6 @@ class Evaluation extends Model
         'commentaire_general_mandat',
     ];
 
-    public function criteria(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(EvaluationCriteria::class);
-    }
-
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -30,4 +24,16 @@ class Evaluation extends Model
     {
         return $this->belongsTo(Brief::class);
     }
+
+    public function criteria(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(EvaluationCriteria::class, 'evaluation_id');
+    }
+
+    public function getAverageNoteAttribute()
+    {
+        $average = $this->criteria()->avg('note');
+        return number_format($average, 1); //
+    }
+
 }
