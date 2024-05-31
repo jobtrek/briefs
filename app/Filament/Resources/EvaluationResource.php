@@ -3,9 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EvaluationResource\Pages;
+use App\Models\Criteria;
 use App\Models\Evaluation;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\Summarizers\Average;
@@ -26,17 +29,22 @@ class EvaluationResource extends Resource
             ->schema([
                 Fieldset::make('Sélections')
                     ->schema([
-                        Forms\Components\Select::make('user_id')
-                            ->relationship('user', 'name')
-                            ->searchable()
-                            ->required()
-                            ->preload(),
-
-                        Forms\Components\Select::make('brief_id')
-                            ->relationship('brief', 'name')
-                            ->searchable()
-                            ->required()
-                            ->preload(),
+                        Grid::make(2)
+                            ->schema([
+                                Forms\Components\Select::make('user_id')
+                                    ->relationship('user', 'name')
+                                    ->searchable()
+                                    ->required()
+                                    ->preload()
+                                    ->columnSpan(1),
+                                Forms\Components\Select::make('brief_id')
+                                    ->relationship('brief', 'name')
+                                    ->searchable()
+                                    ->required()
+                                    ->selectablePlaceholder("criteria_id")
+                                    ->preload()
+                                    ->columnSpan(1),
+                            ]),
                     ]),
 
                 Fieldset::make('Évaluations')
@@ -44,41 +52,62 @@ class EvaluationResource extends Resource
                         Forms\Components\Repeater::make('criteria')
                             ->relationship()
                             ->schema([
-                                Forms\Components\Select::make('criteria_id')
-                                    ->relationship('criteria', 'description')
-                                    ->required()
-                                    ->preload()
-                                    ->searchable(),
+                                Grid::make(4)
+                                    ->schema([
+                                        Forms\Components\Select::make('criteria_id')
+                                            ->relationship('criteria', 'description')
+                                            ->required()
+                                            ->preload()
+                                            ->searchable()
+                                            ->label('Critères')
+                                            ->columnSpan(1),
 
-                                Forms\Components\TextInput::make('note_max')
-                                    ->numeric()
-                                    ->minValue(1)
-                                    ->maxValue(50)
-                                    ->required(),
+                                        TextInput::make('note_max')
+                                            ->numeric()
+                                            ->minValue(1)
+                                            ->maxValue(50)
+                                            ->required()
+                                            ->label('Note MAX')
+                                            ->columnSpan(1),
 
-                                Forms\Components\TextInput::make('note')
-                                    ->numeric()
-                                    ->minValue(1)
-                                    ->maxValue(50)
-                                    ->required(),
+                                        TextInput::make('note')
+                                            ->numeric()
+                                            ->minValue(1)
+                                            ->maxValue(50)
+                                            ->required()
+                                            ->label('Note')
+                                            ->columnSpan(1),
 
-                                Forms\Components\TextInput::make('commentaire')
-                                    ->required()
-                                    ->maxLength(250),
+                                        TextInput::make('commentaire')
+                                            ->required()
+                                            ->maxLength(250)
+                                            ->label('Commentaire')
+                                            ->columnSpan(1),
+                                    ]),
                             ])
-                            ->defaultItems(1),
+                            ->defaultItems(3)
+                            ->columnSpan('full'),
                     ]),
 
                 Fieldset::make('Informations générales')
                     ->schema([
-                        Forms\Components\Textarea::make('commentaire_general_mandat')
-                            ->required()
-                            ->label("Commentaire générale apprentis")
-                            ->placeholder("Entrez votre commentaire ici..."),
+                        Grid::make(2)
+                            ->schema([
+                                Forms\Components\Textarea::make('commentaire_general_mandat')
+                                    ->required()
+                                    ->label("Commentaire générale apprentis")
+                                    ->placeholder("Entrez votre commentaire ici...")
+                                    ->columnStart(1)
+                                    ->autosize()
+                                    ->columnSpan(1),
 
-                        Forms\Components\DatePicker::make('date_evaluation')
-                            ->required()
-                            ->label("Date d'évaluation"),
+                                Forms\Components\DatePicker::make('date_evaluation')
+                                    ->required()
+                                    ->label("Date d'évaluation")
+                                ->columnStart(2)
+                                    ->columnSpan(1)
+                                ,
+                            ]),
                     ]),
             ]);
     }
@@ -102,12 +131,19 @@ class EvaluationResource extends Resource
                     ->label('Moyenne des notes')
                     ->getStateUsing(fn (Evaluation $record) => $record->average_note),
             ])
+
+
+
             ->filters([
                 SelectFilter::make('user_id')
                     ->label('Filtrer par Apprentis')
                     ->options(\App\Models\User::pluck('name', 'id')->toArray()),
             ])
-            ->actions([])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
