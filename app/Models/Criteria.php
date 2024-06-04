@@ -19,4 +19,5 @@ class Criteria extends Model
         return $this->belongsTo(Brief::class);
     }
 
+
 }

@@ -9,7 +9,14 @@ class Task extends Model
 {
     use HasFactory;
 
-    public mixed $start;
-    protected $fillable = ['name', 'start', 'end'];
+    protected $fillable = [
+        'name',
+        'start',
+        'end',
+    ];
 
+    protected $casts = [
+        'start' => 'datetime',
+        'end' => 'datetime',
+    ];
 }
