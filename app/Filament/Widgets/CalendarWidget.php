@@ -71,4 +71,25 @@ class CalendarWidget extends FullCalendarWidget
                 ]),
         ];
     }
+
+    public function config(): array
+    {
+        return [
+            'headerToolbar' => [
+                'left' => 'prev,next today',
+                'center' => 'title',
+                'right' => 'dayGridMonth,timeGridWeek,timeGridDay',
+            ],
+            'initialView' => 'dayGridMonth',
+            'editable' => true,
+            'selectable' => true,
+            'hiddenDays' => [0, 6],
+            'dayMaxEvents' => true,
+            'eventTimeFormat' => [
+                'hour' => '2-digit',
+                'minute' => '2-digit',
+                'meridiem' => 'short',
+            ],
+        ];
+    }
 }
