@@ -11,9 +11,8 @@ class PublicBriefController
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $briefs = Brief::with('briefBranch', 'briefLevel')->get();
-        return view('filament.pages.public-briefs', compact('briefs'));
+        return view('filament.pages.public-briefs');
     }
-
 
 
 }

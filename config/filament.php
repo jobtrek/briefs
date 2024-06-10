@@ -58,7 +58,6 @@ return [
     | After changing the path, you should run `php artisan filament:assets`.
     |
     */
-
     'assets_path' => null,
 
     /*

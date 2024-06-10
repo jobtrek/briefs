@@ -6,11 +6,11 @@ use Filament\Facades\Filament;
 
 class Dashboard
 {
-    public function getWidgets(): array
-
+    protected function getWidgets(): array
     {
-        return Filament::getWidgets();
-
+        return [
+            \App\Filament\Widgets\briefprocessing::class,
+            \App\Filament\Widgets\briefreduced::class,
+        ];
     }
-
 }

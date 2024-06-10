@@ -24,7 +24,6 @@ class PublicBriefs extends Page implements HasTable
     }
 
 
-
     protected function getTableQuery(): Builder
     {
         return Brief::query();
