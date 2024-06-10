@@ -10,7 +10,5 @@ class Calendar extends Page
 
     protected static string $view = 'filament.pages.calendar';
 
+
 }
-
-
-

@@ -10,7 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class xBriefResource extends Resource
+class BriefResource extends Resource
 {
     protected static ?string $model = Brief::class;
 

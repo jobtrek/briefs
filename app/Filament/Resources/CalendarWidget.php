@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Resources;
 
 use App\Models\Task;
-use Illuminate\Database\Eloquent\Model;
-use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 use Filament\Forms;
+use Illuminate\Database\Eloquent\Model;
 use Saade\FilamentFullCalendar\Actions;
+use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
 class CalendarWidget extends FullCalendarWidget
 {
