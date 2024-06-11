@@ -2,7 +2,7 @@
 
 namespace App\Filament\pages;
 
-use Filament\Facades\Filament;
+use App\Filament\Widgets\StatsOverview;
 
 class Dashboard
 {
@@ -11,6 +11,8 @@ class Dashboard
         return [
             \App\Filament\Widgets\briefprocessing::class,
             \App\Filament\Widgets\briefreduced::class,
+            StatsOverview::class,
+
         ];
     }
 }
