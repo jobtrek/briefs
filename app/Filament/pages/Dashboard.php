@@ -3,7 +3,6 @@
 namespace App\Filament\pages;
 
 use App\Filament\Widgets\StatsOverview;
-
 class Dashboard
 {
     protected function getWidgets(): array

@@ -12,8 +12,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CriteriaResource extends Resource
 {
@@ -21,6 +19,8 @@ class CriteriaResource extends Resource
     protected static ?string $navigationGroup ='Mandats';
 
     protected static ?string $navigationIcon = 'heroicon-o-document-plus';
+    protected static ?string $pluralLabel = 'Critères';
+
 
     public static function form(Form $form): Form
     {

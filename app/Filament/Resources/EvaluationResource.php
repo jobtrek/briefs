@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\EvaluationResource\Pages;
-use App\Models\Criteria;
 use App\Models\Evaluation;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
@@ -11,7 +10,6 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\Summarizers\Average;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -22,6 +20,8 @@ class EvaluationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-chart-bar';
     protected static ?string $navigationGroup = 'Evaluations';
+    protected static ?string $pluralLabel = 'Mes évaluations';
+
 
     public static function form(Forms\Form $form): Forms\Form
     {

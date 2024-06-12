@@ -14,7 +14,6 @@ class briefreduced extends ChartWidget
     {
         return 'line';
     }
-
     protected function getData(): array
     {
         $data = [];
@@ -36,8 +35,8 @@ class briefreduced extends ChartWidget
                 [
                     'label' => 'Mandats délivrés',
                     'data' => $data,
-                    'backgroundColor' => 'rgba(75, 192, 192, 0.2)', // Vert avec transparence
-                    'borderColor' => 'rgba(75, 192, 192, 1)', // Vert sans transparence
+                    'backgroundColor' => 'rgba(75, 192, 192, 0.2)',
+                    'borderColor' => 'rgba(75, 192, 192, 1)',
                     'borderWidth' => 2,
                     'hoverBackgroundColor' => 'rgba(75, 192, 192, 0.4)',
                     'hoverBorderColor' => 'rgba(75, 192, 192, 1)',
@@ -60,7 +59,7 @@ class briefreduced extends ChartWidget
                     'legend' => [
                         'display' => true,
                         'labels' => [
-                            'color' => '#FFFFFF', // Blanc pour les étiquettes de légende
+                            'color' => '#FFFFFF',
                             'font' => [
                                 'size' => 14,
                                 'family' => 'Arial, sans-serif'
@@ -71,7 +70,7 @@ class briefreduced extends ChartWidget
                         'enabled' => true,
                         'mode' => 'index',
                         'intersect' => false,
-                        'backgroundColor' => 'rgba(0, 0, 0, 0.7)', // Fond semi-transparent noir pour les infobulles
+                        'backgroundColor' => 'rgba(0, 0, 0, 0.7)',
                         'titleColor' => '#FFFFFF',
                         'bodyColor' => '#FFFFFF',
                         'footerColor' => '#FFFFFF',
@@ -80,13 +79,13 @@ class briefreduced extends ChartWidget
                 'scales' => [
                     'x' => [
                         'ticks' => [
-                            'color' => '#FFFFFF', // Blanc pour les étiquettes des axes
+                            'color' => '#FFFFFF',
                             'font' => [
                                 'size' => 12,
                             ]
                         ],
                         'grid' => [
-                            'color' => 'rgba(255, 255, 255, 0.1)', // Grille avec une légère transparence
+                            'color' => 'rgba(255, 255, 255, 0.1)',
                         ]
                     ],
                     'y' => [

@@ -20,12 +20,10 @@ class PublicBriefs extends Page implements HasTable
     {
         return false;
     }
-
     protected function getTableQuery(): Builder
     {
         return Brief::query();
     }
-
     protected function getTableColumns(): array
     {
         return [
@@ -52,7 +50,6 @@ class PublicBriefs extends Page implements HasTable
                 ->extraAttributes(['class' => 'text-primary']),
         ];
     }
-
     protected function getTableFilters(): array
     {
         return [

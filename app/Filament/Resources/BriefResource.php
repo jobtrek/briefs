@@ -17,6 +17,8 @@ class BriefResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
     protected static ?string $navigationGroup = 'Mandats';
 
+    protected static ?string $pluralLabel = 'Mandats';
+
     public static function form(Form $form): Form
     {
         return $form

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Saade\FilamentFullCalendar\Actions;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
+
+
 class CalendarWidget extends FullCalendarWidget
 {
     public Model | string | null $model = Task::class;

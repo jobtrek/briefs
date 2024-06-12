@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brief;
-use App\Filament\Resources\BriefResource;
+use App\Filament\Resources\BrieffResource;
 class PublicBriefController
 {
 
