@@ -18,7 +18,7 @@ class CriteriaResource extends Resource
     protected static ?string $model = Criteria::class;
     protected static ?string $navigationGroup ='Mandats';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-plus';
+    protected static ?string $navigationIcon = 'heroicon-o-squares-plus';
     protected static ?string $pluralLabel = 'Critères';
 
 
