@@ -83,3 +83,15 @@ Ce projet utilise une combinaison de technologies modernes pour assurer une appl
 
     ./vendor/bin/sail up -d
 
+
+créer le system de suivere l'apprentis 
+Utilser  Inline chart Column comoinent  pour suire l'evaluation apprenits pour les semester 
+Pour
+combiner les resource entre les resource filament
+
+utiliser les graphique pour montrer l'evoolution entre les apprentis
+meilleures et mauvais 
+ esseyer dans le dashborad 
+
+
+plusieur chooose a faire 

@@ -17,6 +17,7 @@ class Brief extends Model
         'attachment',
         'brief_branch_id',
         'brief_level_id',
+        'semester'
     ];
 
     protected $casts = [
