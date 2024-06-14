@@ -51,8 +51,6 @@ class Lastbrief extends BaseWidget
             ])
 
 
-
-
             ->actions([
             ]);
     }

@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "awcodes/filament-badgeable-column": "^2.3",
         "aymanalhattami/filament-page-with-sidebar": "^2.4",
         "bezhansalleh/filament-shield": "^3.2",
         "chrisreedio/socialment": "^3.4",
@@ -19,7 +20,9 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.8",
+        "saade/filament-fullcalendar": "^3.0",
         "socialiteproviders/microsoft-azure": "^5.1",
+        "spatie/laravel-permission": "^6.7",
         "swisnl/filament-backgrounds": "^1.1"
     },
     "require-dev": {

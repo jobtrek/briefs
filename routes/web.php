@@ -1,8 +1,10 @@
 <?php
 
-use App\Filament\Resources\PublicMandatResource;
+use App\Filament\pages\Dashboard;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\PublicBriefController;
+use App\Filament\Pages\PublicBriefs;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +18,9 @@ use Laravel\Socialite\Facades\Socialite;
 */
 
 
-Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
+//Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
 
+Route::get('/', PublicBriefs::class);
 
 
 Route::get('/login/azure/redirect', function () {
@@ -27,3 +30,4 @@ Route::get('/login/azure/redirect', function () {
 Route::get('/login/azure/callback', function () {
     $user = Socialite::driver('azure')->user();
 });
+

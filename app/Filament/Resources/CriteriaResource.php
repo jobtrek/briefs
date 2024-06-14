@@ -4,21 +4,23 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CriteriaResource\Pages;
 use App\Filament\Resources\CriteriaResource\RelationManagers;
+use App\Models\Brief;
 use App\Models\Criteria;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CriteriaResource extends Resource
 {
     protected static ?string $model = Criteria::class;
     protected static ?string $navigationGroup ='Mandats';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-plus';
+    protected static ?string $navigationIcon = 'heroicon-o-squares-plus';
+    protected static ?string $pluralLabel = 'Critères';
+
 
     public static function form(Form $form): Form
     {
@@ -36,6 +38,9 @@ class CriteriaResource extends Resource
 
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -45,7 +50,12 @@ class CriteriaResource extends Resource
 
             ])
             ->filters([
-                //
+                SelectFilter::make('brief')
+                    ->label('Brief')
+                    ->relationship('brief', 'name')
+                    ->options(function () {
+                        return Brief::all()->pluck('name', 'id')->toArray();
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -4,7 +4,6 @@
 
     class="h-11"
 
-
  alt="logo jobtrek"
 
 >

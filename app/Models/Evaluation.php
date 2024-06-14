@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,26 +10,15 @@ class Evaluation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'date_evaluation',
-        'brief_id',
-        'criteria_id',
         'user_id',
-        'note',
-        'note_max',
+        'brief_id',
+        'date_evaluation',
         'commentaire_general_mandat',
     ];
 
-    protected static function booted(): void
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        static::created(function ($evaluation) {
-            DB::table('evaluation_criterias')->insert([
-                'criteria_id' => $evaluation->criteria_id,
-                'note' => $evaluation->note,
-                'note_max' => $evaluation->note_max,
-                'commentaire' => $evaluation->commentaire_general_mandat,
-                'updated_at' => now(),
-            ]);
-        });
+        return $this->belongsTo(User::class);
     }
 
     public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -38,22 +26,15 @@ class Evaluation extends Model
         return $this->belongsTo(Brief::class);
     }
 
-    public function criteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function criteria(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsTo(Criteria::class);
+        return $this->hasMany(EvaluationCriteria::class, 'evaluation_id');
     }
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function getAverageNoteAttribute()
     {
-        return $this->belongsTo(User::class);
+        $average = $this->criteria()->avg('note');
+        return number_format($average, 1); //
     }
 
-    public function getCriteriaDescriptionAttribute()
-    {
-        return optional($this->criteria)->description;
-    }
-    public function evaluationCriteria(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(EvaluationCriteria::class, 'criteria_id');
-    }
 }

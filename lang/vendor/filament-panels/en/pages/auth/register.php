@@ -4,7 +4,7 @@ return [
 
     'title' => 'Register',
 
-    'heading' => 'Sign up',
+    'heading' => '',
 
     'actions' => [
 

@@ -1,0 +1,9 @@
+[90m= [39m[34;4mApp\Models\User[39;24m {#6981
+    [34memail[39m: "[32mbilal.janir@jobtrek.ch[39m",
+    [34mname[39m: "[32msuper_admin[39m",
+    #[33mpassword[39m: "[32m$2y$12$hinYIJSlZVcKkbVMX.kDO.Ovq4mlUX6XbB.2svl6YDPQnUo/IeroG[39m",
+    [34mupdated_at[39m: "[32m2024-05-27 12:00:17[39m",
+    [34mcreated_at[39m: "[32m2024-05-27 12:00:17[39m",
+    [34mid[39m: [35m7[39m,
+  }
+

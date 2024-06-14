@@ -1,67 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+![Laravel](https://laravel.com/img/logotype.min.svg)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Documentation du Projet
 
-## About Laravel
+## Introduction
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Bienvenue dans la documentation de notre projet. Ce document fournit des informations détaillées sur les technologies utilisées, les étapes d'installation, la structure du projet, et bien plus encore.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Technologies Utilisées
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ce projet utilise une combinaison de technologies modernes pour assurer une application web robuste, scalable et maintenable. Voici un aperçu des principales technologies et outils utilisés :
 
-## Learning Laravel
+### Frameworks et Plateformes
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Laravel**: Un framework PHP moderne et élégant pour le développement web. Laravel facilite la gestion de la base de données, la routage des URL, l'authentification des utilisateurs et bien plus encore.
+- **Filament**: Un framework d'administration pour Laravel qui permet de créer rapidement des interfaces d'administration puissantes et élégantes. Il simplifie la gestion des données grâce à ses ressources CRUD, widgets et actions personnalisées.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Conteneurisation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Docker**: Docker est utilisé pour contenir l'application et ses dépendances, assurant ainsi un environnement de développement cohérent. Docker Compose est utilisé pour définir et orchestrer les différents services de l'application (base de données, serveur web, etc.).
 
-## Laravel Sponsors
+### Gestion des Dépendances
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Composer**: Utilisé pour gérer les dépendances PHP du projet. Il permet d'installer et de mettre à jour facilement les bibliothèques nécessaires.
+- **Node.js et npm**: Node.js est utilisé comme environnement d'exécution pour les outils de développement front-end, tandis que npm gère les packages JavaScript. Cela inclut des outils comme Laravel Mix pour compiler les assets front-end.
 
-### Premium Partners
+### Base de Données
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **PostgreSQL (Pgsql)**: PostgreSQL est choisi comme système de gestion de base de données relationnelle pour sa robustesse, ses performances et ses fonctionnalités avancées.
 
-## Contributing
+## Fonctionnalités
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Gestion des Utilisateurs**: Système complet d'authentification et de gestion des utilisateurs.
+- **CRUD pour Mandats**: Interface pour créer, lire, mettre à jour et supprimer des mandats.
+- **Widgets Statistiques**: Affichage des statistiques sur les mandats et les utilisateurs.
+- **Filtrage Avancé**: Filtres pour rechercher et trier les mandats par différents critères.
+- **Support Multilingue**: Interface disponible en plusieurs langues.
+- **Responsive Design**: Adaptabilité de l'interface pour différents appareils (desktop, tablette, mobile).
 
-## Code of Conduct
+## Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Prérequis
 
-## Security Vulnerabilities
+- **PHP**: Version 7.4 ou supérieure.
+- **Composer**: Version 2.0 ou supérieure.
+- **Node.js**: Version 14.0 ou supérieure.
+- **npm**: Version 6.0 ou supérieure.
+- **Docker**: Version 20.x ou supérieure.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Étapes d'Installation
 
-## License
+1. Clonez le dépôt du projet :
+   ```bash
+   git clone https://github.com/Bilaljanir/briefs
+   
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# briefs
+
+## Installez les dépendances PHP :
+
+    composer install
+
+## Installez les dépendances JavaScript :
+
+    npm install
+
+## Configurez votre fichier d'environnement :
+
+        .env
+## Démarrez Docker Compose :
+
+    docker-compose up -d
+
+## Exécutez les migrations et les seeders :
+
+    sail artisan migrate --seed
+
+
+## Compilez les assets front-end :
+
+    npm run dev
+
+## Démarrez les services Docker avec Laravel Sail :
+
+    ./vendor/bin/sail up -d
+
+
+créer le system de suivere l'apprentis 
+Utilser  Inline chart Column comoinent  pour suire l'evaluation apprenits pour les semester 
+Pour
+combiner les resource entre les resource filament
+
+utiliser les graphique pour montrer l'evoolution entre les apprentis
+meilleures et mauvais 
+ esseyer dans le dashborad 
+
+
+plusieur chooose a faire 

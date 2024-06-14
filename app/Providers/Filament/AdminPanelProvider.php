@@ -10,7 +10,6 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -18,9 +17,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
-use function Filament\Support\get_color_css_variables;
-use function Psy\debug;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -41,21 +38,25 @@ class AdminPanelProvider extends PanelProvider
                 'success' => Color::Emerald,
                 'warning' => Color::Orange,
             ])
+
             ->plugins([
+                FilamentFullCalendarPlugin::make()
+            ])
+        ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \ChrisReedIO\Socialment\SocialmentPlugin::make()
                     ->registerProvider('azure', 'fab-microsoft', 'Login avec Microsoft')
                     ->loginRoute('filament.staff.auth.login')
             ])
 
+
+
             ->plugins([
-                FilamentBackgroundsPlugin::make(),
             ])
 
             ->colors([
                 'primary' => '#7EAF3A',
             ])
-
 
             ->font('Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

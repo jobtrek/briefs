@@ -14,6 +14,8 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
+
+    use HasRoles;
     use HasApiTokens,HasRoles,HasFactory,HasPanelShield,Notifiable;
 
     public function canAccessPanel(Panel $panel): bool

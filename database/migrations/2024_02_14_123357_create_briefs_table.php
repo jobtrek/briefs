@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('brief_level_id')->constrained();
             $table->string('attachment')->nullable();
             $table->enum('year', ['1', '2', '3'])->default('1');
+            $table->enum('semester', ['1', '2'])->default('1');
             $table->timestamps();
         });
     }

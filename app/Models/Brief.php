@@ -17,6 +17,7 @@ class Brief extends Model
         'attachment',
         'brief_branch_id',
         'brief_level_id',
+        'semester'
     ];
 
     protected $casts = [
@@ -32,4 +33,11 @@ class Brief extends Model
     {
         return $this->belongsTo(BriefBranch::class);
     }
+
+
+    public function criteria(): belongsTo
+    {
+        return $this->belongsTo(BriefBranch::class);
+    }
+
 }

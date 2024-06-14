@@ -14,13 +14,14 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 class BriefRealisationResource extends Resource
 {
     protected static ?string $model = BriefRealisation::class;
     protected static ?string $navigationGroup = 'Mandats';
     protected static ?string $navigationIcon = 'heroicon-o-document-check';
+    protected static ?string $pluralLabel = 'Mandats Realisés';
+
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -46,7 +47,6 @@ class BriefRealisationResource extends Resource
                     ->required(),
             ]);
     }
-
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
