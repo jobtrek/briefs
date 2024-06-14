@@ -112,6 +112,9 @@ class EvaluationResource extends Resource
             ]);
     }
 
+    /**w
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -150,7 +153,6 @@ class EvaluationResource extends Resource
                 ]),
             ]);
     }
-
     public static function getRelations(): array
     {
         return [];

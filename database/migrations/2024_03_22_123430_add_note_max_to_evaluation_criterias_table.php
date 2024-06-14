@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('criterias', function (Blueprint $table) {
-            $table->id();
-            $table->text('description');
-            $table->text('commentaire');
-            $table->foreignId('brief_id')->constrained();
-            $table->timestamps();
+        Schema::table('evaluation_criterias', function (Blueprint $table) {
+            $table->integer('note_max')->default(50);
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('criterias');
+        Schema::table('evaluation_criterias', function (Blueprint $table) {
+            $table->dropColumn('note_max');
+        });
     }
 };

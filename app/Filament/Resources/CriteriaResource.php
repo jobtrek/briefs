@@ -32,6 +32,8 @@ class CriteriaResource extends Resource
                     ->required()
                     ->preload()
                     ->searchable(),
+                Forms\Components\TextInput::make('note')->required(),
+
             ]);
 
     }

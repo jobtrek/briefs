@@ -35,5 +35,4 @@ class BriefRealisation extends Model
     {
         return $this->belongsTo(Brief::class);
     }
-
 }

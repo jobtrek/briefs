@@ -11,7 +11,11 @@ class Criteria extends Model
 
     protected $fillable = [
         'description',
+        'evaluation',
         'brief_id',
+        'commentaire',
+        "evaluation_criteria_id"
+
     ];
 
     public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
