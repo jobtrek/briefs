@@ -11,6 +11,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,7 +22,6 @@ class BriefRealisationResource extends Resource
     protected static ?string $navigationGroup = 'Mandats';
     protected static ?string $navigationIcon = 'heroicon-o-document-check';
     protected static ?string $pluralLabel = 'Mandats Realisés';
-
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -43,10 +43,17 @@ class BriefRealisationResource extends Resource
                     ->required(),
                 ToggleButtons::make('status')
                     ->inline()
-                    ->options(BriefStatus::class)
+                    ->options([
+                        'new' => 'New',
+                        'processing' => 'Processing',
+                        'delivered' => 'Delivered',
+                        'undelivered' => 'Undelivered',
+                    ])
+                    ->default('new')
                     ->required(),
             ]);
     }
+
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
@@ -55,10 +62,18 @@ class BriefRealisationResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name'),
-                TextColumn::make('date_debut'),
-                TextColumn::make('date_fin'),
-                TextColumn::make('status')
-                    ->badge(),
+                TextColumn::make('date_debut')
+                    ->dateTime(),
+                TextColumn::make('date_fin')
+                    ->dateTime(),
+                BadgeColumn::make('status')
+                    ->label('Status')
+                    ->colors([
+                        'secondary' => 'new',
+                        'warning' => 'processing',
+                        'success' => 'delivered',
+                        'danger' => 'undelivered',
+                    ]),
             ])
             ->filters([
                 Filter::make('user')
@@ -88,9 +103,7 @@ class BriefRealisationResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getNavigationBadge(): ?string

@@ -13,6 +13,7 @@
     >
 </div>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const logoDark = document.getElementById('logo-dark');
@@ -34,4 +35,5 @@
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     });
 </script>
+
 
