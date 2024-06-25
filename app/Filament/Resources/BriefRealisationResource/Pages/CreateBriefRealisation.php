@@ -10,4 +10,9 @@ class CreateBriefRealisation extends CreateRecord
 {
     protected static string $resource = BriefRealisationResource::class;
 
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['status'] = 'new';
+        return $data;
+    }
 }
