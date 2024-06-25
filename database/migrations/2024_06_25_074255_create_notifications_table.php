@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('evaluation_criterias', function (Blueprint $table) {
-            $table->integer('note_max')->default(50);
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->timestamp('read_at')->nullable();
+            $table->timestamps();
+            $table->json('data');
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('evaluation_criterias', function (Blueprint $table) {
-            $table->dropColumn('note_max');
-        });
+        Schema::dropIfExists('notifications');
     }
 };

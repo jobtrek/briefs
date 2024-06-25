@@ -15,15 +15,12 @@ return new class extends Migration
             $table->id();
             $table->date('date_evaluation');
             $table->text('commentaire_general_mandat');
-<<<<<<<< HEAD:database/migrations/2024_05_30_112300_create_evaluations_table.php
             $table->foreignId('brief_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-========
             $table->foreignId('brief_id')->constrained();
             $table->foreignId('criteria_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('evaluation_criteria_id')->constrained();
->>>>>>>> 93afda1e219fd557fa375985732ec35f9cef7806:database/migrations/2024_03_19_095554_create_evaluations_table.php
             $table->timestamps();
         });
     }
