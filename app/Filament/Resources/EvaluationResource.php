@@ -13,6 +13,9 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\Summarizers\Average;
+use Illuminate\Support\Facades\DB;
+
 
 class EvaluationResource extends Resource
 {
@@ -133,10 +136,33 @@ class EvaluationResource extends Resource
                 TextColumn::make('note')
                     ->label('Moyenne des notes')
                     ->getStateUsing(fn (Evaluation $record) => $record->average_note),
+
+                TextColumn::make('percentage')
+                    ->label('Pourcentage Moyen')
+                    ->getStateUsing(function (Evaluation $record) {
+                        $totalNotes = $record->criteria->sum('pivot.note');
+                        $totalMaxNotes = $record->criteria->sum('pivot.note_max');
+                        return $totalMaxNotes ? round(($totalNotes / $totalMaxNotes) * 100, 2) . '%' : 'N/A';
+                    })
+                    ->sortable(),
+
+                TextColumn::make('general_average')
+                    ->label('Moyenne Générale')
+                    ->getStateUsing(function (Evaluation $record) {
+                        $totalNotes = DB::table('evaluation_criterias')
+                            ->join('evaluations', 'evaluation_criterias.evaluation_id', '=', 'evaluations.id')
+                            ->where('evaluations.user_id', $record->user_id)
+                            ->sum('evaluation_criterias.note');
+
+                        $totalMaxNotes = DB::table('evaluation_criterias')
+                            ->join('evaluations', 'evaluation_criterias.evaluation_id', '=', 'evaluations.id')
+                            ->where('evaluations.user_id', $record->user_id)
+                            ->sum('evaluation_criterias.note_max');
+
+                        return $totalMaxNotes ? round(($totalNotes / $totalMaxNotes) * 100, 2) . '%' : 'N/A';
+                    })
+                    ->sortable(),
             ])
-
-
-
             ->filters([
                 SelectFilter::make('user_id')
                     ->label('Filtrer par Apprentis')
@@ -145,7 +171,6 @@ class EvaluationResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

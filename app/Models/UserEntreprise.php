@@ -15,13 +15,4 @@ class UserEntreprise extends Model
         'entreprise_id',
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function brief(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Brief::class, 'entreprise_id');
-    }
 }

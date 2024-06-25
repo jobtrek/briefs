@@ -10,7 +10,7 @@
     "require": {
         "php": "^8.2",
         "awcodes/filament-badgeable-column": "^2.3",
-        "aymanalhattami/filament-page-with-sidebar": "^2.4",
+        "aymanalhattami/filament-page-with-sidebar": "^2.5",
         "bezhansalleh/filament-shield": "^3.2",
         "chrisreedio/socialment": "^3.4",
         "filament/filament": "^3.2",

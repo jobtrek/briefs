@@ -24,6 +24,11 @@ class User extends Authenticatable implements FilamentUser
         return true;
     }
 
+    public function entreprises(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Entreprise::class, 'user_entreprises');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
