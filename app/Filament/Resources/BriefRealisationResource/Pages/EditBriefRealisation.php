@@ -16,4 +16,12 @@ class EditBriefRealisation extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        if (now()->gt($data['date_fin']) && $data['status'] !== 'delivered') {
+            $data['status'] = 'undelivered';
+        }
+        return $data;
+    }
 }

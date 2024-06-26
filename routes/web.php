@@ -18,6 +18,9 @@ use App\Filament\Pages\PublicBriefs;
 */
 
 
+
+
+
 //Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index']);
 
 Route::get('/', PublicBriefs::class);
