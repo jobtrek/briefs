@@ -198,7 +198,7 @@ class ProfessionalEvaluationResource extends Resource
                 TextColumn::make('commentaire')
                     ->label('Commentaire général')
             ])
-            ->filters([d
+            ->filters([
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

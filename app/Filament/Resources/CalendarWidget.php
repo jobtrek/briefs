@@ -93,5 +93,7 @@ class CalendarWidget extends FullCalendarWidget
                 'meridiem' => 'short',
             ],
         ];
+
+
     }
 }
