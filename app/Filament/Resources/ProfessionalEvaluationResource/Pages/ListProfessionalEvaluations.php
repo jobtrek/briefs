@@ -3,17 +3,17 @@
 namespace App\Filament\Resources\ProfessionalEvaluationResource\Pages;
 
 use App\Filament\Resources\ProfessionalEvaluationResource;
+use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use App\Filament\Widgets\EvaluationStatistics;
 
 class ListProfessionalEvaluations extends ListRecords
 {
     protected static string $resource = ProfessionalEvaluationResource::class;
 
-    protected function getHeaderWidgets(): array
+    protected function getHeaderActions(): array
     {
         return [
-            EvaluationStatistics::class,
+            Actions\CreateAction::make(),
         ];
     }
 }

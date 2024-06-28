@@ -13,7 +13,7 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
-use Illuminate\Support\HtmlString;
+use App\Filament\Widgets\ProfessionnalEvaluation as ProfessionnalEvaluationWidget;
 
 class ProfessionalEvaluationResource extends Resource
 {
@@ -213,6 +213,12 @@ class ProfessionalEvaluationResource extends Resource
     {
         return [];
     }
+    public static function widgets(): array
+    {
+        return [
+            ProfessionnalEvaluationWidget::class,
+        ];
+    }
 
     public static function getPages(): array
     {
@@ -220,6 +226,7 @@ class ProfessionalEvaluationResource extends Resource
             'index' => Pages\ListProfessionalEvaluations::route('/'),
             'create' => Pages\CreateProfessionalEvaluation::route('/create'),
             'edit' => Pages\EditProfessionalEvaluation::route('/{record}/edit'),
+            'view' => Pages\ViewProfessionalEvaluation::route('/{record}'),
         ];
     }
 }
