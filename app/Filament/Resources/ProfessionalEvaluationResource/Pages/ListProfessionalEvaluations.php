@@ -16,4 +16,19 @@ class ListProfessionalEvaluations extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            ProfessionalEvaluationResource\Pages\ProfessionnalEvaluation::class,
+
+        ];
+    }
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+        ];
+    }
+
 }

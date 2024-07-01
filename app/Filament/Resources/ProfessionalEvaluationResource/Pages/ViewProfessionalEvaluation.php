@@ -12,7 +12,6 @@ class ViewProfessionalEvaluation extends ViewRecord
     protected function getHeaderWidgets(): array
     {
         return [
-            \App\Filament\Widgets\ProfessionnalEvaluation::class,
         ];
     }
 

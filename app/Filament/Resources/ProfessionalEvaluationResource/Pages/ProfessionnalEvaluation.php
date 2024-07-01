@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Resources\ProfessionalEvaluationResource\Pages;
 
 use App\Models\ProfessionalEvaluation;
 use Filament\Widgets\ChartWidget;
@@ -8,6 +8,8 @@ use Filament\Widgets\ChartWidget;
 class ProfessionnalEvaluation extends ChartWidget
 {
     protected static ?string $heading = 'Évaluation Professionnelle';
+    protected static ?string $maxHeight = '350px';
+
 
     protected function getData(): array
     {

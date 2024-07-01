@@ -2,18 +2,18 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProfessionalEvaluationResource\Pages;
+use App\Filament\Resources\ProfessionalEvaluationResource\Pages\ProfessionnalEvaluation as ProfessionnalEvaluationWidget;
 use App\Models\ProfessionalEvaluation;
 use Filament\Forms;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
-use App\Filament\Widgets\ProfessionnalEvaluation as ProfessionnalEvaluationWidget;
+use Filament\Forms\Components\Textarea;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class ProfessionalEvaluationResource extends Resource
 {
