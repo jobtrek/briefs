@@ -12,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -139,6 +140,7 @@ class ProfessionalEvaluationResource extends Resource
                     ]),
             ]);
     }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -147,56 +149,82 @@ class ProfessionalEvaluationResource extends Resource
                     ->label('Utilisateur')
                     ->searchable(),
 
-                TextColumn::make('teamwork')
+                BadgeColumn::make('teamwork')
                     ->label('Travail en équipe')
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞'),
-                TextColumn::make('teamwork_comment')
-                    ->label('Commentaire sur le Travail en équipe'),
+                    ->colors([
+                        'success' => fn ($state) => $state == 1,
+                        'danger' => fn ($state) => $state == 0,
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
+                    ->extraAttributes(['class' => 'text-center']),
 
-                TextColumn::make('punctuality')
+
+                BadgeColumn::make('punctuality')
                     ->label('Ponctualité')
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞'),
-                TextColumn::make('punctuality_comment')
-                    ->label('Commentaire sur la Ponctualité'),
+                    ->colors([
+                        'success' => fn ($state) => $state == 1,
+                        'danger' => fn ($state) => $state == 0,
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
+                    ->extraAttributes(['class' => 'text-center']),
 
-                TextColumn::make('reactivity')
+                BadgeColumn::make('reactivity')
                     ->label('Réactivité')
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞'),
-                TextColumn::make('reactivity_comment')
-                    ->label('Commentaire sur la Réactivité'),
+                    ->colors([
+                        'success' => fn ($state) => $state == 1,
+                        'danger' => fn ($state) => $state == 0,
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
+                    ->extraAttributes(['class' => 'text-center']),
 
-                TextColumn::make('communication')
+
+                BadgeColumn::make('communication')
                     ->label('Communication')
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞'),
-                TextColumn::make('communication_comment')
-                    ->label('Commentaire sur la Communication'),
-
-                TextColumn::make('problem_solving')
+                    ->colors([
+                        'success' => fn ($state) => $state == 1,
+                        'danger' => fn ($state) => $state == 0,
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
+                    ->extraAttributes(['class' => 'text-center']),
+                BadgeColumn::make('problem_solving')
                     ->label('Résolution de problèmes')
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞'),
-                TextColumn::make('problem_solving_comment')
-                    ->label('Commentaire sur la Résolution de problèmes'),
+                    ->colors([
+                        'success' => fn ($state) => $state == 1,
+                        'danger' => fn ($state) => $state == 0,
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
+                    ->extraAttributes(['class' => 'text-center']),
 
-                TextColumn::make('adaptability')
+                BadgeColumn::make('adaptability')
                     ->label('Adaptabilité')
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞'),
-                TextColumn::make('adaptability_comment')
-                    ->label('Commentaire sur l\'Adaptabilité'),
+                    ->colors([
+                        'success' => fn ($state) => $state == 1,
+                        'danger' => fn ($state) => $state == 0,
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
+                    ->extraAttributes(['class' => 'text-center']),
 
-                TextColumn::make('innovation')
+                BadgeColumn::make('innovation')
                     ->label('Innovation')
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞'),
-                TextColumn::make('innovation_comment')
-                    ->label('Commentaire sur l\'Innovation'),
+                    ->colors([
+                        'success' => fn ($state) => $state == 1,
+                        'danger' => fn ($state) => $state == 0,
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
+                    ->extraAttributes(['class' => 'text-center']),
 
-                TextColumn::make('professionalism')
+                BadgeColumn::make('professionalism')
                     ->label('Professionnalisme')
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞'),
-                TextColumn::make('professionalism_comment')
-                    ->label('Commentaire sur le Professionnalisme'),
+                    ->colors([
+                        'success' => fn ($state) => $state == 1,
+                        'danger' => fn ($state) => $state == 0,
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
+                    ->extraAttributes(['class' => 'text-center']),
 
                 TextColumn::make('commentaire')
                     ->label('Commentaire général')
+                    ->extraAttributes(['class' => 'whitespace-normal'])
             ])
             ->filters([
             ])
@@ -213,6 +241,7 @@ class ProfessionalEvaluationResource extends Resource
     {
         return [];
     }
+
     public static function widgets(): array
     {
         return [
