@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
+use TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -51,6 +52,8 @@ class AdminPanelProvider extends PanelProvider
 
 
             ->plugins([
+                FilamentSettingsHubPlugin::make()
+
             ])
 
             ->colors([
