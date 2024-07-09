@@ -61,6 +61,7 @@
                     </div>
                 </div>
 
+                <blo></blo>
                 <div class="col-[--col-span-default]
                         sm:col-[--col-span-sm]
                         md:col-[--col-span-md]
@@ -82,5 +83,71 @@
         <x-filament-page-with-sidebar::topbar :sidebar="$sidebar"/>
 
         {{ $slot }}
-   @endif
-</div>
+   @endi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

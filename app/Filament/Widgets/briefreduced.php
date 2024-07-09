@@ -14,6 +14,7 @@ class briefreduced extends ChartWidget
     {
         return 'line';
     }
+
     protected function getData(): array
     {
         $data = [];
@@ -41,6 +42,7 @@ class briefreduced extends ChartWidget
                     'hoverBackgroundColor' => 'rgba(75, 192, 192, 0.4)',
                     'hoverBorderColor' => 'rgba(75, 192, 192, 1)',
                     'fill' => true,
+                    'tension' => 0.4,
                 ],
             ],
             'labels' => $labels,
@@ -100,6 +102,15 @@ class briefreduced extends ChartWidget
                             'color' => 'rgba(255, 255, 255, 0.1)',
                         ]
                     ],
+                ],
+                'animations' => [
+                    'tension' => [
+                        'duration' => 1000,
+                        'easing' => 'linear',
+                        'from' => 1,
+                        'to' => 0,
+                        'loop' => true,
+                    ]
                 ],
             ],
         ];
