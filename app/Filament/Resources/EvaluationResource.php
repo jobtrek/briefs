@@ -38,6 +38,7 @@ class EvaluationResource extends Resource
                                     ->relationship('user', 'name')
                                     ->searchable()
                                     ->required()
+                                    ->autofocus()
                                     ->preload()
                                     ->columnSpan(1),
                                 Forms\Components\Select::make('brief_id')
@@ -85,7 +86,7 @@ class EvaluationResource extends Resource
                                             ->required()
                                             ->maxLength(250)
                                             ->label('Commentaire')
-                                            ->columnSpan(1),
+                                            ->columnSpan(1)
                                     ]),
                             ])
                             ->defaultItems(3)
@@ -107,7 +108,7 @@ class EvaluationResource extends Resource
                                 Forms\Components\DatePicker::make('date_evaluation')
                                     ->required()
                                     ->label("Date d'évaluation")
-                                ->columnStart(2)
+                                    ->columnStart(2)
                                     ->columnSpan(1)
                                 ,
                             ]),
@@ -135,15 +136,20 @@ class EvaluationResource extends Resource
 
                 TextColumn::make('note')
                     ->label('Moyenne des notes')
-                    ->getStateUsing(fn (Evaluation $record) => $record->average_note),
+                    ->getStateUsing(fn (Evaluation $record) => $record->average_note)
 
-                TextColumn::make('percentage')
-                    ->label('Pourcentage Moyen')
-                    ->getStateUsing(function (Evaluation $record) {
-                        $totalNotes = $record->criteria->sum('pivot.note');
-                        $totalMaxNotes = $record->criteria->sum('pivot.note_max');
-                        return $totalMaxNotes ? round(($totalNotes / $totalMaxNotes) * 100, 2) . '%' : 'N/A';
-                    })
+                    ->sortable(),
+                TextColumn::make('commentaire_general_mandat')
+                    ->label('Commentaire général'),
+
+                TextColumn::make('note')
+                    ->label('Moyenne des notes')
+                    ->getStateUsing(fn (Evaluation $record) => $record->average_note)
+                    ->sortable(),      TextColumn::make('commentaire_general_mandat')
+                    ->label('Commentaire général'),
+                TextColumn::make('note')
+                    ->label('Moyenne des notes')
+                    ->getStateUsing(fn (Evaluation $record) => $record->average_note)
                     ->sortable(),
 
                 TextColumn::make('general_average')

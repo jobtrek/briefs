@@ -6,3 +6,18 @@
     @apply bg-cover bg-center bg-no-repeat w-full h-full;
     background-image: url('/img/jobtrekv.jpg');
 }
+
+.fi-simple-layout:before {
+    background: linear-gradient(0deg, rgba(0, 0, 255, 0.6), transparent 25%) no-repeat; /* Changé en bleu */
+}
+
+
+
+
+.progress-bar {
+    @apply h-4 w-full bg-gray-100 dark:bg-gray-800 rounded-full shadow-inner overflow-hidden
+}
+
+.progress-bar-value {
+    @apply flex h-full items-center justify-center bg-primary-600 dark:bg-primary-500 rounded-r-full shadow-inner text-xs font-bold text-white;
+}

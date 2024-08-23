@@ -29,6 +29,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Entreprise::class, 'user_entreprises');
     }
 
+    public function criterias()
+    {
+        return $this->hasMany(Criteria::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

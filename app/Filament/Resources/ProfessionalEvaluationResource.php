@@ -1,252 +1,147 @@
 <?php
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProfessionalEvaluationResource\Pages;
-use App\Filament\Resources\ProfessionalEvaluationResource\Pages\ProfessionnalEvaluation as ProfessionnalEvaluationWidget;
 use App\Models\ProfessionalEvaluation;
 use Filament\Forms;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Radio;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Columns\BadgeColumn;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use App\Tables\Columns\ProgressColumn;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Filters\SelectFilter;
 
 class ProfessionalEvaluationResource extends Resource
 {
     protected static ?string $model = ProfessionalEvaluation::class;
-    protected static ?string $navigationIcon = 'heroicon-o-face-smile';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     protected static ?string $navigationGroup = 'Evaluations';
 
-    public static function form(Forms\Form $form): Forms\Form
+
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Card::make()
+                Section::make('Information de l\'Utilisateur')
                     ->schema([
-                        Select::make('user_id')
+                        Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
                             ->searchable()
                             ->required()
-                            ->label('Apprentis')
-                            ->preload(),
+                            ->preload()
+                            ->columnSpan(1),
+                    ])
+                    ->columns(2)
+                    ->description('Sélectionnez l\'utilisateur à évaluer')
+                    ->icon('heroicon-o-user'),
 
-                        Grid::make(2)
-                            ->schema([
-                                Radio::make('teamwork')
-                                    ->label('Travail en équipe')
-                                    ->options([
-                                        1 => '😊',
-                                        0 => '😞',
-                                    ])
-                                    ->inline()
-                                    ->required(),
-                                Textarea::make('teamwork_comment')
-                                    ->label('Commentaire sur le Travail en équipe')
-                                    ->placeholder("Entrez votre commentaire ici..."),
+                Section::make('Évaluation Professionnelle')
+                    ->schema([
+                        Forms\Components\TextInput::make('teamwork')
+                            ->label('Travail d\'équipe')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\Textarea::make('teamwork_comment')
+                            ->label('Commentaire sur le travail d\'équipe'),
 
-                                Radio::make('punctuality')
-                                    ->label('Ponctualité')
-                                    ->options([
-                                        1 => '😊',
-                                        0 => '😞',
-                                    ])
-                                    ->inline()
-                                    ->required(),
-                                Textarea::make('punctuality_comment')
-                                    ->label('Commentaire sur la Ponctualité')
-                                    ->placeholder("Entrez votre commentaire ici..."),
+                        Forms\Components\TextInput::make('punctuality')
+                            ->label('Ponctualité')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\Textarea::make('punctuality_comment')
+                            ->label('Commentaire sur la ponctualité'),
 
-                                Radio::make('reactivity')
-                                    ->label('Réactivité')
-                                    ->options([
-                                        1 => '😊',
-                                        0 => '😞',
-                                    ])
-                                    ->inline()
-                                    ->required(),
-                                Textarea::make('reactivity_comment')
-                                    ->label('Commentaire sur la Réactivité')
-                                    ->placeholder("Entrez votre commentaire ici..."),
+                        Forms\Components\TextInput::make('reactivity')
+                            ->label('Réactivité')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\Textarea::make('reactivity_comment')
+                            ->label('Commentaire sur la réactivité'),
 
-                                Radio::make('communication')
-                                    ->label('Communication')
-                                    ->options([
-                                        1 => '😊',
-                                        0 => '😞',
-                                    ])
-                                    ->inline()
-                                    ->required(),
-                                Textarea::make('communication_comment')
-                                    ->label('Commentaire sur la Communication')
-                                    ->placeholder("Entrez votre commentaire ici..."),
+                        Forms\Components\TextInput::make('communication')
+                            ->label('Communication')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\Textarea::make('communication_comment')
+                            ->label('Commentaire sur la communication'),
 
-                                Radio::make('problem_solving')
-                                    ->label('Résolution de problèmes')
-                                    ->options([
-                                        1 => '😊',
-                                        0 => '😞',
-                                    ])
-                                    ->inline()
-                                    ->required(),
-                                Textarea::make('problem_solving_comment')
-                                    ->label('Commentaire sur la Résolution de problèmes')
-                                    ->placeholder("Entrez votre commentaire ici..."),
+                        Forms\Components\TextInput::make('problem_solving')
+                            ->label('Résolution de problèmes')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\Textarea::make('problem_solving_comment')
+                            ->label('Commentaire sur la résolution de problèmes'),
 
-                                Radio::make('adaptability')
-                                    ->label('Adaptabilité')
-                                    ->options([
-                                        1 => '😊',
-                                        0 => '😞',
-                                    ])
-                                    ->inline()
-                                    ->required(),
-                                Textarea::make('adaptability_comment')
-                                    ->label('Commentaire sur l\'Adaptabilité')
-                                    ->placeholder("Entrez votre commentaire ici..."),
+                        Forms\Components\TextInput::make('adaptability')
+                            ->label('Adaptabilité')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\Textarea::make('adaptability_comment')
+                            ->label('Commentaire sur l\'adaptabilité'),
 
-                                Radio::make('innovation')
-                                    ->label('Innovation')
-                                    ->options([
-                                        1 => '😊',
-                                        0 => '😞',
-                                    ])
-                                    ->inline()
-                                    ->required(),
-                                Textarea::make('innovation_comment')
-                                    ->label('Commentaire sur l\'Innovation')
-                                    ->placeholder("Entrez votre commentaire ici..."),
+                        Forms\Components\TextInput::make('innovation')
+                            ->label('Innovation')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\Textarea::make('innovation_comment')
+                            ->label('Commentaire sur l\'innovation'),
 
-                                Radio::make('professionalism')
-                                    ->label('Professionnalisme')
-                                    ->options([
-                                        1 => '😊',
-                                        0 => '😞',
-                                    ])
-                                    ->inline()
-                                    ->required(),
-                                Textarea::make('professionalism_comment')
-                                    ->label('Commentaire sur le Professionnalisme')
-                                    ->placeholder("Entrez votre commentaire ici..."),
-                            ]),
+                        Forms\Components\TextInput::make('professionalism')
+                            ->label('Professionnalisme')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\Textarea::make('professionalism_comment')
+                            ->label('Commentaire sur le professionnalisme'),
+                    ])
+                    ->columns(2)
+                    ->description('Veuillez évaluer les compétences professionnelles de l\'utilisateur.')
+                    ->icon('heroicon-o-briefcase'),
 
-                        Textarea::make('commentaire')
-                            ->label('Commentaire général')
-                            ->placeholder("Entrez votre commentaire ici..."),
-                    ]),
+                Section::make('Commentaire Général')
+                    ->schema([
+                        Forms\Components\Textarea::make('commentaire')
+                            ->label('Commentaire Général'),
+                    ])
+                    ->description('Vous pouvez ajouter des commentaires supplémentaires concernant la performance globale de l\'utilisateur.')
+                    ->icon('heroicon-o-chat-bubble-bottom-center-text')
             ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('user.name')
                     ->label('Utilisateur')
+                    ->sortable()
                     ->searchable(),
 
-                BadgeColumn::make('teamwork')
-                    ->label('Travail en équipe')
-                    ->colors([
-                        'success' => fn ($state) => $state == 1,
-                        'danger' => fn ($state) => $state == 0,
-                    ])
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
-                    ->extraAttributes(['class' => 'text-center']),
 
-
-                BadgeColumn::make('punctuality')
-                    ->label('Ponctualité')
-                    ->colors([
-                        'success' => fn ($state) => $state == 1,
-                        'danger' => fn ($state) => $state == 0,
-                    ])
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
-                    ->extraAttributes(['class' => 'text-center']),
-
-                BadgeColumn::make('reactivity')
-                    ->label('Réactivité')
-                    ->colors([
-                        'success' => fn ($state) => $state == 1,
-                        'danger' => fn ($state) => $state == 0,
-                    ])
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
-                    ->extraAttributes(['class' => 'text-center']),
-
-
-                BadgeColumn::make('communication')
-                    ->label('Communication')
-                    ->colors([
-                        'success' => fn ($state) => $state == 1,
-                        'danger' => fn ($state) => $state == 0,
-                    ])
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
-                    ->extraAttributes(['class' => 'text-center']),
-                BadgeColumn::make('problem_solving')
-                    ->label('Résolution de problèmes')
-                    ->colors([
-                        'success' => fn ($state) => $state == 1,
-                        'danger' => fn ($state) => $state == 0,
-                    ])
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
-                    ->extraAttributes(['class' => 'text-center']),
-
-                BadgeColumn::make('adaptability')
-                    ->label('Adaptabilité')
-                    ->colors([
-                        'success' => fn ($state) => $state == 1,
-                        'danger' => fn ($state) => $state == 0,
-                    ])
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
-                    ->extraAttributes(['class' => 'text-center']),
-
-                BadgeColumn::make('innovation')
-                    ->label('Innovation')
-                    ->colors([
-                        'success' => fn ($state) => $state == 1,
-                        'danger' => fn ($state) => $state == 0,
-                    ])
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
-                    ->extraAttributes(['class' => 'text-center']),
-
-                BadgeColumn::make('professionalism')
-                    ->label('Professionnalisme')
-                    ->colors([
-                        'success' => fn ($state) => $state == 1,
-                        'danger' => fn ($state) => $state == 0,
-                    ])
-                    ->formatStateUsing(fn ($state) => $state ? '😊' : '😞')
-                    ->extraAttributes(['class' => 'text-center']),
-
-                TextColumn::make('commentaire')
-                    ->label('Commentaire général')
-                    ->extraAttributes(['class' => 'whitespace-normal'])
+                ViewColumn::make('evaluations')
+                    ->view('tables.columns.evaluation-overview')
+                    ->label('Évaluations')
+                    ->sortable(false)
+                    ->getStateUsing(fn($record) => $record)
+                ,
             ])
             ->filters([
+                SelectFilter::make('user_id')
+                    ->relationship('user', 'name')
+                    ->label('Utilisateur'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [];
-    }
-
-    public static function widgets(): array
-    {
-        return [
-            ProfessionnalEvaluationWidget::class,
-        ];
     }
 
     public static function getPages(): array
@@ -255,7 +150,6 @@ class ProfessionalEvaluationResource extends Resource
             'index' => Pages\ListProfessionalEvaluations::route('/'),
             'create' => Pages\CreateProfessionalEvaluation::route('/create'),
             'edit' => Pages\EditProfessionalEvaluation::route('/{record}/edit'),
-            'view' => Pages\ViewProfessionalEvaluation::route('/{record}'),
         ];
     }
 }

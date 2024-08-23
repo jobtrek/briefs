@@ -32,8 +32,14 @@ Vous y trouverez une liste des derniers mandats associés aux apprentis, avec le
 
 ![img.png](img/status.png)
 
-    - **Critères** : Possibilité d'associer des critères aux mandats.
+Critères : Possibilité d'associer des critères aux mandats.
 
 6. **Section Évaluations** : Permet aux formateurs d'évaluer les apprentis en ajoutant des critères, des notes et des commentaires, et de calculer la moyenne des évaluations.
 
 ![img.png](img/evaluation.png)
+
+7. **Professional evaluation** : Permet aux formateurs de suivre les compétences de l'apprentis à l'entreprise par exemple ponctualité, travaille d'équipe...
+
+regrler les column pour l'affichage de column de pourcentage 
+
+![img.png](img.png)
