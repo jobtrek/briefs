@@ -20,9 +20,7 @@ class ListProfessionalEvaluations extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            ProfessionalEvaluationResource\Pages\ProfessionnalEvaluation::class,
-
-        ];
+            ];
     }
 
     protected function getFooterWidgets(): array

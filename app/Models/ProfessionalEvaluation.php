@@ -31,4 +31,5 @@ class ProfessionalEvaluation extends Model
     {
         return $this->hasMany(ProfessionalEvaluation::class);
     }
+
 }
